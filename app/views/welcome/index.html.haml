@@ -1,2 +1,6 @@
-%h1 Welcome#index
-%p Find me in app/views/welcome/index.html.haml
+- content_for :main_content do
+  %h1 Welcome#index
+  %p Find me in app/views/welcome/index.html.haml
+
+- content_for :nav_content do
+  %h1 Left Nav Content

@@ -1,31 +1,67 @@
 !!!
 %html
   %head
-    %title Todo
+    %title Volunteer Connect: Guinea
     = stylesheet_link_tag    "application", media: "all",  'data-turbolinks-track' => true
     = javascript_include_tag "application", 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
     .container
-      %ul.nav.nav-tabs
-        %li
-          = link_to "Home", root_path
-        %li
-          = link_to "About", about_path
-        %li
-          = link_to "Profile", about_path
-        .pull-right.user-info
-          - if current_user
-            Hello
-            =link_to current_user.name, edit_user_registration_path
-            =link_to edit_user_registration_path, class: 'btn btn-primary btn-sm' do
-              %span.glyphicon.glyphicon-user
-            = link_to destroy_user_session_path, method: :delete, class: 'btn btn-primary btn-sm' do
-              Log Out
-          - else
-            = link_to "Log In", new_user_session_path
-            or
-            \#{link_to "Sign Up", new_user_registration_path}
+      .top-nav
+        .row
+          .col-lg-3.col-md-2.hidden-sm.hidden-xs.text-left
+            %button.btn.btn-default.btn-lg{:type => "button"}
+              %span.glyphicon.glyphicon-star{"aria-hidden" => "true"}
+
+          .col-lg-7.col-md-9.col-sm-8.col-xs-12
+            .input-group
+              %span.input-group-btn
+                %button.btn.btn-default.btn-lg.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :type => "button"}
+                  All
+                  %span.caret
+                %ul.dropdown-menu{:role => "menu"}
+                  %li
+                    %a{:href => "#"} All
+                  %li
+                    %a{:href => "#"} Location
+                  %li
+                    %a{:href => "#"} Time Period
+                  %li.divider
+                  %li
+                    %a{:href => "#"} Keyword
+              %input.form-control.input-lg{:placeholder => "Search for people, villages, time periods, and much more..", :type => "text"}/
+              %span.input-group-btn
+                %button.btn.btn-default.btn-lg.glyphicon.glyphicon-search{:type => "submit"}
+
+          .col-lg-2.col-md-1.col-sm-4.col-xs-12.user-info
+            - if current_user
+              Hello
+              =link_to current_user.name, edit_user_registration_path
+              =link_to edit_user_registration_path, class: 'btn btn-primary btn-sm' do
+                %span.glyphicon.glyphicon-user
+              = link_to destroy_user_session_path, method: :delete, class: 'btn btn-primary btn-sm' do
+                Log Out
+            - else
+              = link_to "Log In", new_user_session_path
+              or
+              \#{link_to "Sign Up", new_user_registration_path}
+
+        .row
+          .col-lg-3
+            %ul.nav.nav-tabs
+              %li
+                = link_to "Home", root_path
+              %li
+                = link_to "About", about_path
+              %li
+                = link_to "Profile", about_path
+          .col-lg-7
+            %ul.nav.nav-tabs.nav-justified
+              %li
+                = link_to "Add a Post", root_path, class: 'btn'
+
+          .col-lg-2
+
 
         - if flash[:notice]
           .alert.alert-success
@@ -39,5 +75,10 @@
           .alert.alert-warning
             %button.close{"data-dismiss" => "alert", :type => "button"} ×
             = flash[:alert]
+      .left-nav
+        .nav-content
+          = yield :nav_content
 
-      = yield
+      .main-body
+        .main-content
+          = yield :main_content

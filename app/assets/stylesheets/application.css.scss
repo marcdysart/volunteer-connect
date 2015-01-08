@@ -1,1 +1,43 @@
  @import "bootstrap";
+
+
+.top-nav {
+   height: 100px;
+   text-align: right;
+ }
+
+
+.left-nav {
+  background: #726f6f;
+   display: block;
+   width: 300px;
+   position: absolute;
+   top: 100px;
+   bottom: 0;
+   left:0px;
+ }
+
+.nav-content {
+   overflow: hidden;
+   overflow-y: auto;
+   position: absolute;
+   top: 0;
+   left: 0;
+   bottom: 0;
+   right: 0;
+ }
+
+.main-body {
+   background: white;
+   position: absolute;
+   left: 300px;
+   top: 100px;
+   bottom: 0;
+   overflow: hidden;
+   overflow-y: auto;
+   padding: 20px 120px 0 0;
+ }
+
+.main-content {
+   left: 220px;
+ }
