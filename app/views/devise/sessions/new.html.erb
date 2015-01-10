@@ -1,6 +1,7 @@
-<h2>Log in</h2>
+<% content_for :main_content do %>
+  <h2>Log in</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
@@ -21,6 +22,13 @@
   <div class="actions">
     <%= f.submit "Log in" %>
   </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+
 <% end %>
 
-<%= render "devise/shared/links" %>
+<% content_for :nav_content do %>
+  <h1>Login to Volunteer Connect! </h1>
+
+<% end %>

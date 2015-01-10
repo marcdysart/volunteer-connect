@@ -1,6 +1,7 @@
 $top_header_height: 125px;
 $top_header_height_adjusted: $top_header_height - 15px;
 $left_nav_width: 300px;
+$left_nav_width_adjusted: $left_nav_width + 15px;
 
 .top-nav {
   height: $top_header_height;
@@ -26,6 +27,7 @@ $left_nav_width: 300px;
   left: 0;
   bottom: 0;
   right: 0;
+  padding: 20px;
 }
 
 .main-body {
@@ -44,7 +46,8 @@ $left_nav_width: 300px;
 }
 
 .main-content {
-  left: 220px;
+
+  padding: 20px;
 }
 #search_button {
   font-size: 25px;
@@ -77,7 +80,7 @@ $left_nav_width: 300px;
   }
   .main-body {
     left: 0;
-    top: 180px;
+    top: 190px;
   }
   .navbar-form .form-control {
 
