@@ -1,6 +1,18 @@
 - content_for :main_content do
-  %h1 Welcome#index
-  %p Find me in app/views/welcome/index.html.haml
+  %br/
+  .jumbotron
+    %h1
+      Volunteer Connect
+    %h1
+      Friends of Guinea
+    %p
+      A way to share your Guinea Peace Corps Volunteer experiences with others who have served in Guinea in the past 50 years.
+      %br/
+      = link_to "Sign In", new_user_session_path, class: 'btn btn-primary'
+      or
+      = link_to "Sign Up", new_user_registration_path, class: 'btn btn-primary'
+      today!
+
 
 - content_for :nav_content do
   %h1 Left Nav Content
