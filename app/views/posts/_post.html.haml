@@ -5,6 +5,7 @@
     %p
       = post.body
     %small
+      = image_tag(post.user.avatar.small.url) if post.user.avatar?
       submitted #{time_ago_in_words(post.created_at)} ago by
       \#{post.user.name}
       %br/
