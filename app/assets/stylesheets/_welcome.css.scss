@@ -1,3 +1,31 @@
 .jumbotron{
   text-align: center;
+  background: url(image_path('Driving-to-sunset.jpg')) no-repeat;
+  background-position: center bottom;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: #f7f2ec !important;
+
+}
+
+.thanksforsearch {
+  text-align: center;
+  background: url(image_path('Driving-to-sunset.jpg')) no-repeat;
+  background-position: center bottom;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 20%;
+  width: 100;
+  color: #f7f2ec !important;
+  padding: 30px;
+
+}
+table.center-table {
+  width:20%;
+  margin-left: 40%;
+  margin-right: 40%;
 }

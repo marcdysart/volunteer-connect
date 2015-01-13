@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   get 'about' => 'welcome#about'
   get 'profile' => 'welcome#about'
+  get 'search' => 'welcome#search'
 
     root to: 'welcome#index'
 end

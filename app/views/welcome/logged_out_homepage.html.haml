@@ -1,0 +1,31 @@
+%br/
+.jumbotron
+  %h1 Volunteer Connect
+  %h1 Friends of Guinea
+  %p A way to share your Guinea Peace Corps Volunteer experiences with others who have served in Guinea in the past 50 years.
+
+  %form.navbar-form.navbar-center{:role => "search"}
+    %button.dropdown.btn.btn-default#search_menu_button
+      %a.btn-default.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+        %span.btn.glyphicon.glyphicon-th-list
+          %span.caret
+      %ul.dropdown-menu{:role => "menu"}
+        %li
+          %a{:href => "#"} All
+        %li
+          %a{:href => "#"} Location
+        %li
+          %a{:href => "#"} Time Period
+        %li.divider
+        %li
+          %a{:href => "#"} Keyword
+    .form-group
+      %input.form-control{:placeholder => "Search for people, villages, time periods, and much more..", :type => "text"}/
+    = link_to '',search_path, class: 'btn btn-default glyphicon glyphicon-search', id:'search_button'
+
+    %br/
+    %br/
+    = link_to "Log In", new_user_session_path, class: 'btn btn-primary'
+    or
+    = link_to "Sign Up", new_user_registration_path, class: 'btn btn-primary'
+    today!
