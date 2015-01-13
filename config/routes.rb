@@ -1,13 +1,7 @@
 Rails.application.routes.draw do
-  get 'posts/index'
-
-  get 'posts/show'
-
-  get 'posts/new'
-
-  get 'posts/edit'
 
   devise_for :users
+  resources :posts
   get 'welcome/index'
 
   get 'about' => 'welcome#about'

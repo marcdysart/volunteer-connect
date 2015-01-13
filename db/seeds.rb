@@ -26,6 +26,7 @@ users = User.all
 # Create Posts
 10.times do
   post = Post.create!(
+  user:   users.sample,
   title:  Faker::Lorem.sentence,
   body:   Faker::Lorem.paragraph
   )
@@ -46,7 +47,7 @@ end
 admin = User.new(
 name:     'Admin User',
 email:    'admin@example.com',
-password: 'helloworld'
+password: 'helloworld',
 role: 'admin'
 )
 admin.skip_confirmation!
@@ -57,7 +58,7 @@ admin.save!
 member = User.new(
 name:     'Member User',
 email:    'member@example.com',
-password: 'helloworld'
+password: 'helloworld',
 role: 'member'
 )
 member.skip_confirmation!

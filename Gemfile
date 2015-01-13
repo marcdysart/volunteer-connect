@@ -48,3 +48,4 @@ end
 
 gem 'devise'
 gem 'pundit'
+gem 'will_paginate', '~> 3.0.5'

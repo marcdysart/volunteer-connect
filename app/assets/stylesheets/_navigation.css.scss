@@ -36,6 +36,7 @@ $left_nav_width_adjusted: $left_nav_width + 15px;
   left: $left_nav_width;
   top: $top_header_height_adjusted;
   bottom: 0;
+  right: 0;
   overflow: hidden;
   overflow-y: auto;
   padding: 20px 120px 0 0;
@@ -46,7 +47,6 @@ $left_nav_width_adjusted: $left_nav_width + 15px;
 }
 
 .main-content {
-
   padding: 20px;
 }
 #search_button {
