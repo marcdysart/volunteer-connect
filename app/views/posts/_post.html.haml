@@ -1,10 +1,18 @@
 .media
   .media-body
-    %h4.media-heading
+    %h3.media-heading
       = link_to (post.title), [post]
+    %p
+      = post.body
     %small
       submitted #{time_ago_in_words(post.created_at)} ago by
       \#{post.user.name}
       %br/
+    %h4
+      Tags
+    %h4
+      Comments
+    %small
       = post.comments.count
       Comments
+    %h5 Add Comments Here

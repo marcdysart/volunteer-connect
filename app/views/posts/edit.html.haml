@@ -1,2 +1,5 @@
-%h1 Posts#edit
-%p Find me in app/views/posts/edit.html.haml
+- content_for :nav_content do
+  %h1 Edit this Post
+
+- content_for :main_content do
+  = render partial: 'form', locals: { post: @post }

@@ -1,0 +1,16 @@
+= form_for [post] do |f|
+  - if post.errors.any?
+    .alert.alert-danger
+      %h4
+        There are #{pluralize(post.errors.count, "error")}.
+      %ul
+        - post.errors.full_messages.each do |msg|
+          %li= msg
+  = content_tag :div, class: 'form_group' do
+    = f.label :title
+    = f.text_field :title, class: 'form-control', placeholder: "Enter post title"
+  = content_tag :div, class: 'form_group' do
+    = f.label :body
+    = f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter post body"
+  .form-group
+    = f.submit "Save", class: 'btn btn-success'
