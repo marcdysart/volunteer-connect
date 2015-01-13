@@ -8,9 +8,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   def new
-
       render 'new', layout: 'logged_out'
-
   end
   # POST /resource
   # def create

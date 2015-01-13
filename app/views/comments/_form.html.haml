@@ -1,0 +1,17 @@
+= form_for [post, comment], remote: true do |f|
+  - if post.errors.any?
+    .alert.alert-danger
+      %h4
+        There are #{pluralize(post.errors.count, "error")}.
+      %ul
+        - post.errors.full_messages.each do |msg|
+          %li= msg
+  %form.form-inline{:role => "form"}
+    .form-group
+      = f.label :"Enter New Comment"
+      .row
+        .col-xs-6
+          = f.text_field :body, class: 'form-control', placeholder: "Enter Comment"
+        .col-xs-2
+          = f.submit "Save Comment", class: 'btn btn-default'
+        .col-xs-4

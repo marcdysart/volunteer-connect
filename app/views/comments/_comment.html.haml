@@ -1,0 +1,8 @@
+= content_tag :div, class: 'media', id: "comment-#{comment.id}" do
+  .media-body
+    %p
+      = comment.body
+      %small
+        %em= comment.user.name
+      - if policy(comment).destroy?
+        | #{link_to "Delete", [comment.post, comment], method: :delete, remote: true}

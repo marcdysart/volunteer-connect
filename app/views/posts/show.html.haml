@@ -5,11 +5,11 @@
   .row
     .col-md-8
       = render partial: 'post', locals: { post: @post }
-      %h3 Comments:
 
-      .new-comment
-        - unless current_user.nil?
-          New Comment
+    .new-comment
+      = render partial: 'comments/form', locals: {post: @post, comment: @comment}
+
+
     .col-md-4
       - if policy(@post).edit?
         = link_to "Edit", edit_post_path( @post), class: 'btn btn-success'

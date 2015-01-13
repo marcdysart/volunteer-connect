@@ -11,8 +11,7 @@
     %h4
       Tags
     %h4
-      Comments
-    %small
-      = post.comments.count
-      Comments
-    %h5 Add Comments Here
+      Comments:
+    .js-comments
+      - post.comments.each do |comment|
+        =render partial: 'comments/comment', locals: {comment: comment}
