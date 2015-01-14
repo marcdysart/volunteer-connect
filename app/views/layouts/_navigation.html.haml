@@ -53,12 +53,15 @@
   .col-lg-3.col-md-4.col-sm-5.col-xs-8
     %ul.nav.nav-tabs
       %li
-        = link_to "Home", root_path
+        - if current_user
+          = link_to "Home", posts_path
+        - else
+          = link_to "Home", root_path
       %li
         = link_to "About", about_path
       - if current_user
         %li
-          = link_to "Profile", about_path
+          = link_to "Profile", profile_path
   .col-lg-7.col-md-6.col-sm-5.col-xs-4
     %ul.nav.nav-tabs.nav-justified
       - if current_user

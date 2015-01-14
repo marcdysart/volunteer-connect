@@ -9,9 +9,9 @@
       submitted #{time_ago_in_words(post.created_at)} ago by
       \#{post.user.name}
       %br/
+      %br/
 
-      %p Current image
-      = image_tag( post.image.url ) if post.image?
+      = image_tag(post.image.large) if post.image?
     %h4
       Tags
     %h4
