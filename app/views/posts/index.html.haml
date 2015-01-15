@@ -2,5 +2,7 @@
   %h1 Left Nav Content
 
 - content_for :main_content do
-  = render @posts
+  - @posts.each do |post|
+    = render partial: 'posts/post', locals: {post: post}
+
   = will_paginate @posts

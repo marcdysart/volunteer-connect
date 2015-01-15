@@ -53,10 +53,7 @@
   .col-lg-3.col-md-4.col-sm-5.col-xs-8
     %ul.nav.nav-tabs
       %li
-        - if current_user
-          = link_to "Home", posts_path
-        - else
-          = link_to "Home", root_path
+        = link_to "Home", root_path
       %li
         = link_to "About", about_path
       - if current_user
