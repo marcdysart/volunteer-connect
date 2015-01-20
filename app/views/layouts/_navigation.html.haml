@@ -34,18 +34,18 @@
     %form.navbar-form.navbar-left{:role => "search"}
       %button.dropdown.btn.btn-default#search_menu_button
         %a.btn-default.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-          %span.btn.glyphicon.glyphicon-th-list
+          %span.btn.glyphicon.glyphicon-th-list#search_button_name
             %span.caret
         %ul.dropdown-menu{:role => "menu"}
           %li
-            %a{:href => "#"} All
+            %a#all_search{:href => "#"} All
           %li
-            %a{:href => "#"} Location
+            %a#location_search{:href => "#"} Location
           %li
-            %a{:href => "#"} Time Period
+            %a#time_search{:href => "#"} Time Period
           %li.divider
           %li
-            %a{:href => "#"} Keyword
+            %a#keyword_search{:href => "#"} Keyword
       .form-group
         %input.form-control{:placeholder => "Search for people, villages, time periods, and much more..", :type => "text"}/
       %button.btn.btn-default.glyphicon.glyphicon-search#search_button{:type => "submit"}
