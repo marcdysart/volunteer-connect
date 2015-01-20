@@ -19,4 +19,16 @@ $(document).ready(function(){
     });
   });
 
+
+  $('#dropdownLocation').click(function () {
+    console.log("Location Location is clicked");
+    $('.dropdown-menu a').click(function(ev) {
+      var item_id = $(this).attr('id');
+      var item_name = $(this).text();
+      console.log(item_id+' and '+item_name);
+      $('#location_choice').replaceWith("<span id='location_choice'>"+item_name+"</span>");
+    });
+  });
+
+
 });
