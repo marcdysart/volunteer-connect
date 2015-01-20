@@ -4,9 +4,15 @@ Rails.application.routes.draw do
 
   resources :users, only: [:update, :show, :index]
   resources :posts, only: [:index] do
+    resources :locations, only: [:create, :destroy]
     resources :comments, only: [:create, :destroy]
+
   end
-  resources :posts, except: [:index]
+  resources :posts, except: [:index] do
+    resources :locations, only: [:create, :destroy]
+  end
+
+  resources :locations
 
   get 'welcome/index'
 

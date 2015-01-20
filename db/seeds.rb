@@ -22,25 +22,44 @@ users = User.all
 # The `save` method then saves this User to the database.
 
 
+# Create Locations
+10.times do
+  location = Location.new(
+  name: Faker::Address.city
+  )
+  location.save!
+end
+locations = Location.all
 
 # Create Posts
 10.times do
   post = Post.create!(
   user:   users.sample,
   title:  Faker::Lorem.sentence,
-  body:   Faker::Lorem.paragraph
+  body:   Faker::Lorem.paragraph,
+  locations: [locations.sample,locations.sample]
   )
 
 end
 posts = Post.all
 
+
+
 # Create Comments
 30.times do
   Comment.create!(
-  user: users.sample,  
+  user: users.sample,
   post:   posts.sample,
   body:   Faker::Lorem.sentence
   )
+end
+
+3.times do
+  extra_locations = Location.create!(
+  name:   Faker::Address.city,
+  posts: [posts.sample,posts.sample]
+  )
+
 end
 
 # Create an admin user
@@ -66,6 +85,7 @@ member.save!
 
 
 puts "Seed finished"
+puts "#{Location.count} locations created"
 puts "#{User.count} users created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"

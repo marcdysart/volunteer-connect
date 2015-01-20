@@ -23,3 +23,7 @@
 
   .form-group
     = f.submit "Save", class: 'btn btn-success'
+
+
+  .new-location
+    = render partial: 'locations/form', locals: {post: @post, location: @location}

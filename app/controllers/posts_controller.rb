@@ -5,12 +5,15 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @location = Location.all
     @comment = Comment.new
     authorize @post
   end
 
   def new
     @post = Post.new
+    @location = Location.new
+    @locations = Location.all
     authorize @post
   end
 
