@@ -12,13 +12,14 @@
   = content_tag :div, class: 'form_group' do
     = f.label :body
     = f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter post body"
+  .form-group
+    = f.label 'Link to Webpage'
+    = f.url_field 'url_link'
+
   - unless post.image.url.nil?
     .form-group
       %p Current image
       = image_tag( post.image.url )
-  .form-group
-    = f.label 'Link to Webpage'
-    = f.url_field 'url_link', :value => "http://"
   .form-group
     = f.label :image
     = f.file_field :image
