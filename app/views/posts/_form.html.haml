@@ -29,6 +29,9 @@
   .form-group
     = f.label :location, class: 'control-label'
     = select_tag('post[location_ids][]', options_from_collection_for_select(Location.all, 'id', 'name'), {include_blank: 'Choose Location', :multiple => true, :size => 5})
+  .form-group
+    = f.label :person, class: 'control-label'
+    = select_tag('post[person_ids][]', options_from_collection_for_select(Person.all, 'id', 'name'), {include_blank: 'Choose Person', :multiple => true, :size => 5})
 
   .form-group
     = link_to "Cancel", :back, class: 'btn btn-default'

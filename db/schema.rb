@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150122164049) do
+ActiveRecord::Schema.define(version: 20150122220546) do
 
   create_table "comments", force: true do |t|
     t.text     "body"
@@ -26,9 +26,9 @@ ActiveRecord::Schema.define(version: 20150122164049) do
 
   create_table "locations", force: true do |t|
     t.string   "name"
+    t.integer  "post_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "post_id"
   end
 
   add_index "locations", ["post_id"], name: "index_locations_on_post_id"
@@ -38,6 +38,34 @@ ActiveRecord::Schema.define(version: 20150122164049) do
     t.integer "post_id",     null: false
   end
 
+  create_table "people", force: true do |t|
+    t.string   "name"
+    t.integer  "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "people", ["post_id"], name: "index_people_on_post_id"
+
+  create_table "people_posts", id: false, force: true do |t|
+    t.integer "person_id", null: false
+    t.integer "post_id",   null: false
+  end
+
+  create_table "peoples", force: true do |t|
+    t.string   "name"
+    t.integer  "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "peoples", ["post_id"], name: "index_peoples_on_post_id"
+
+  create_table "peoples_posts", id: false, force: true do |t|
+    t.integer "people_id", null: false
+    t.integer "post_id",   null: false
+  end
+
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "body"
@@ -45,18 +73,14 @@ ActiveRecord::Schema.define(version: 20150122164049) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "image"
-    t.string   "location"
     t.integer  "location_id"
     t.string   "url_link"
+    t.integer  "people_id"
   end
 
   add_index "posts", ["location_id"], name: "index_posts_on_location_id"
-
-  create_table "tags", force: true do |t|
-    t.string   "location"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "posts", ["people_id"], name: "index_posts_on_people_id"
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "name"

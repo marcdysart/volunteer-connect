@@ -16,11 +16,12 @@
       = link_to post.url_link, post.url_link if post.url_link?
     %h4
       Tags
-      Locations:
-
-
+    Locations:
     - post.locations.each do |location|
       =render partial: 'locations/location', locals: {location: location}
+    People:
+    - post.people.each do |person|
+      =render partial: 'people/person', locals: {person: person}
     %h4
       Comments:
     .js-comments

@@ -31,13 +31,23 @@ users = User.all
 end
 locations = Location.all
 
+# Create People
+10.times do
+  person = Person.new(
+  name: Faker::Name.name
+  )
+  person.save!
+end
+people = Person.all
+
 # Create Posts
 10.times do
   post = Post.create!(
   user:   users.sample,
   title:  Faker::Lorem.sentence,
   body:   Faker::Lorem.paragraph,
-  locations: [locations.sample,locations.sample]
+  locations: [locations.sample,locations.sample],
+  people: [people.sample,people.sample]
   )
 
 end
