@@ -37,7 +37,7 @@ class PeriodsController < ApplicationController
   end
 
   def create
-    @period = Period.all.build(person_params)
+    @period = Period.all.build(period_params)
     @new_period = Period.new
     authorize @period
 

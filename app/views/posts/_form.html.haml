@@ -39,7 +39,7 @@
         = select_tag('post[person_ids][]', options_from_collection_for_select(Person.all, 'id', 'name'), {:multiple => true, :size => 5})
     .col-md-4
       .form-group
-        = link_to 'Create a new Date', new_person_path, :class => 'btn btn-primary'
+        = link_to 'Create a new Date', new_period_path, :class => 'btn btn-primary'
       .form-group
         = f.label 'Choose Date', class: 'control-label'
         = select_tag('post[period_ids][]', options_from_collection_for_select(Period.all, 'id', 'start'), {:multiple => true, :size => 5})
