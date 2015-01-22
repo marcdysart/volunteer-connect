@@ -40,6 +40,15 @@ locations = Location.all
 end
 people = Person.all
 
+# Create Dates
+10.times do
+  period = Period.new(
+  start: Faker::Date.backward(2000)
+  )
+  period.save!
+end
+periods = Period.all
+
 # Create Posts
 10.times do
   post = Post.create!(
@@ -47,7 +56,8 @@ people = Person.all
   title:  Faker::Lorem.sentence,
   body:   Faker::Lorem.paragraph,
   locations: [locations.sample,locations.sample],
-  people: [people.sample,people.sample]
+  people: [people.sample,people.sample],
+  periods: [periods.sample]
   )
 
 end

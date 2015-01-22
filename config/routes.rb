@@ -6,16 +6,19 @@ Rails.application.routes.draw do
   resources :posts, only: [:index] do
     resources :locations
     resources :people
+    resources :period
     resources :comments, only: [:create, :destroy]
 
   end
   resources :posts, except: [:index] do
     resources :locations, only: [:create, :destroy]
     resources :people, only: [:create, :destroy]
+    resources :period, only: [:create, :destroy]
   end
 
   resources :locations
   resources :people
+  resources :periods
 
   get 'welcome/index'
 

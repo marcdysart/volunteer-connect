@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150122220546) do
+ActiveRecord::Schema.define(version: 20150122230459) do
 
   create_table "comments", force: true do |t|
     t.text     "body"
@@ -63,6 +63,21 @@ ActiveRecord::Schema.define(version: 20150122220546) do
 
   create_table "peoples_posts", id: false, force: true do |t|
     t.integer "people_id", null: false
+    t.integer "post_id",   null: false
+  end
+
+  create_table "periods", force: true do |t|
+    t.date     "start"
+    t.date     "end"
+    t.integer  "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "periods", ["post_id"], name: "index_periods_on_post_id"
+
+  create_table "periods_posts", id: false, force: true do |t|
+    t.integer "period_id", null: false
     t.integer "post_id",   null: false
   end
 

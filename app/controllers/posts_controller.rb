@@ -7,6 +7,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @location = Location.all
     @person = Person.all
+    @period = Period.all
     @comment = Comment.new
     authorize @post
   end
@@ -17,6 +18,8 @@ class PostsController < ApplicationController
     @locations = Location.all
     @person = Person.new
     @people = Person.all
+    @period = Period.new
+    @periods = Period.all
     authorize @post
   end
 
@@ -41,6 +44,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @locations = @post.locations
     @people = @post.people
+    @period = @post.periods
     authorize @post
 
     if @post.update_attributes(post_params)
@@ -69,7 +73,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :image, :image_cache, :url_link, :location_ids => [], :person_ids => [])
+    params.require(:post).permit(:title, :body, :image, :image_cache, :url_link, :location_ids => [], :person_ids => [], :period_ids => [])
   end
 
 

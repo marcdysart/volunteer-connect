@@ -3,4 +3,4 @@
     %p
       = link_to person.name, person
       - if policy(person).destroy?
-        | #{link_to "Remove Person", [person.post, location], method: :delete, remote: true}
+        | #{link_to "Remove Person", [person.post, person], method: :delete, remote: true}

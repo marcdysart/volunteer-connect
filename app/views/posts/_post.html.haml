@@ -22,6 +22,9 @@
     People:
     - post.people.each do |person|
       =render partial: 'people/person', locals: {person: person}
+    Date:
+    - post.periods.each do |period|
+      =render partial: 'periods/period', locals: {period: period}
     %h4
       Comments:
     .js-comments
