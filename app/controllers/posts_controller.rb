@@ -36,6 +36,7 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
+    @locations = @post.locations
     authorize @post
 
     if @post.update_attributes(post_params)

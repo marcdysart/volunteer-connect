@@ -1,19 +1,12 @@
 - content_for :nav_content do
-  %h1 Post at
+  %h1
     = @location.name
 
 - content_for :main_content do
   .row
-    .col-md-8
-      = render partial: 'post', locals: { post: @post }
-
-      .new-comment
-        = render partial: 'comments/form', locals: {post: @post, comment: @comment}
-
-
-
-    .col-md-4
-      - if policy(@post).edit?
-        = link_to "Edit", edit_post_path( @post), class: 'btn btn-success'
-      - if policy(@post).destroy?
-        = link_to "Delete Post", [@post], method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this post?' }
+    .col-md-12
+      - @posts.each do |post|
+        = render partial: 'posts/post', locals: { post: post }
+        .new-comment
+          = render partial: 'comments/form', locals: {post: post, comment: @comment}
+  = will_paginate @posts

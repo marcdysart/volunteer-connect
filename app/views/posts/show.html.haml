@@ -1,11 +1,12 @@
 - content_for :nav_content do
-  %h1 Left Nav Content
+  %h1
+    =@post.title
 
 - content_for :main_content do
   .row
     .col-md-8
       = render partial: 'post', locals: { post: @post }
-      
+
       .new-comment
         = render partial: 'comments/form', locals: {post: @post, comment: @comment}
 

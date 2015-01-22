@@ -1,6 +1,6 @@
 = content_tag :div, class: 'media', id: "location-#{location.id}" do
   .media-body
     %p
-      = location.name
+      = link_to location.name, location
       - if policy(location).destroy?
         | #{link_to "Remove Location", [location.post, location], method: :delete, remote: true}

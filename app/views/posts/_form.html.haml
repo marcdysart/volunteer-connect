@@ -30,6 +30,7 @@
     = select_tag('post[location_ids][]', options_from_collection_for_select(Location.all, 'id', 'name'), {include_blank: 'Choose Location', :multiple => true, :size => 5})
 
   .form-group
+    = link_to "Cancel", :back, class: 'btn btn-default'
     = f.submit "Save", class: 'btn btn-success'
 
   -# .dropdown

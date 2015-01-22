@@ -19,9 +19,10 @@ class LocationsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:post_id])
-    @location = Location.new
-    @locations = @post.locations
+    @location = Location.find(params[:id])
+    @posts = @location.posts.paginate(page: params[:page], per_page: 6)
+    @comment = Comment.new
+    authorize @location
   end
 
   def edit
