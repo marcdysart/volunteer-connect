@@ -1,0 +1,25 @@
+- content_for :nav_content do
+  %h1 Add a New Location
+
+- content_for :main_content do
+  .col-md-4
+    = form_for @location do |f|
+      %form.form-inline{:role => "form"}
+        .form-group
+          = f.label :"Enter New Location"
+          .row
+            .col-xs-6
+              = f.text_field :name, class: 'form-control', placeholder: "Enter New Location"
+            .col-xs-2
+              = f.submit "Save Location", class: 'btn btn-default'
+            .col-xs-4
+  .col-md-8
+    %table.table.table-hover
+      %thead
+        %tr
+          %th Current Locations
+      %tbody
+        - Location.all.each do |location|
+          %tr
+            %td
+              = location.name

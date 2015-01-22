@@ -1,4 +1,6 @@
 $(document).ready(function(){
+
+  // This changes the dropdown for search in the navigation
   $('#search_menu_button').on('show.bs.dropdown', function () {
     console.log("Search is clicked");
     $('#all_search').click(function(ev) {
@@ -19,13 +21,12 @@ $(document).ready(function(){
     });
   });
 
-
+// This changes the dropdown for location
   $('#dropdownLocation').click(function () {
     console.log("Location Location is clicked");
     $('.dropdown-menu a').click(function(ev) {
       var item_id = $(this).attr('id');
       var item_name = $(this).text();
-      console.log(item_id+' and '+item_name);
       $('#location_choice').replaceWith("<span id='location_choice'>"+item_name+"</span>");
     });
   });

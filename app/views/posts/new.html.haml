@@ -2,4 +2,9 @@
   %h1 Add a New Post
 
 - content_for :main_content do
+
+  - @post.locations.each do |location|
+    =render partial: 'locations/location', locals: {location: location}
+
+
   = render partial: 'form', locals: { post: @post }

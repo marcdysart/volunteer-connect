@@ -2,3 +2,5 @@
   .media-body
     %p
       = location.name
+      - if policy(location).destroy?
+        | #{link_to "Remove Location", [location.post, location], method: :delete, remote: true}

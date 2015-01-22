@@ -12,6 +12,8 @@
       %br/
 
       = image_tag(post.image.large) if post.image?
+
+      = link_to post.url_link, post.url_link if post.url_link?
     %h4
       Tags
       Locations:

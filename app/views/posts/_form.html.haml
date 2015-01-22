@@ -17,13 +17,28 @@
       %p Current image
       = image_tag( post.image.url )
   .form-group
+    = f.label 'Link to Webpage'
+    = f.url_field 'url_link', :value => "http://"
+  .form-group
     = f.label :image
     = f.file_field :image
     = f.hidden_field :image_cache
+  .form-group
+    = link_to 'Create a new Location', new_location_path, :class => 'btn btn-primary'
+  .form-group
+    = f.label :location, class: 'control-label'
+    = select_tag('post[location_ids][]', options_from_collection_for_select(Location.all, 'id', 'name'), {include_blank: 'Choose Location', :multiple => true, :size => 5})
 
   .form-group
     = f.submit "Save", class: 'btn btn-success'
 
-
-  .new-location
-    = render partial: 'locations/form', locals: {post: @post, location: @location}
+  -# .dropdown
+  -#   %button.btn.btn-default#dropdownLocation.dropdown-toggle{"aria-expanded" => "true", "data-toggle" => "dropdown", :type => "button"}
+  -#     %span#location_choice
+  -#       Locations
+  -#     %span.caret
+  -#   %ul.dropdown-menu{"aria-labelledby" => "dropdownLocation", :role => "menu"}
+  -#     - @locations.each do |location|
+  -#       %li{:role => "presentation"}
+  -#         %a{:id => location.id, :href => "#", :role => "menuitem", :tabindex => "-1"}
+  -#           =location.name

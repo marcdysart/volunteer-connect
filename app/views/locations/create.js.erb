@@ -1,0 +1,6 @@
+<% if @location.valid?  %>
+$('.js-locations').prepend("<%= escape_javascript(render(@location)) %>");
+$('.new-locations').html("<%= escape_javascript(render partial: 'locations/form', locals: { post: @post, location: @new_location }) %>");
+<% else %>
+$('.new-locations').html("<%= escape_javascript(render partial: 'locations/form', locals: { post: @post, location: @location }) %>");
+<% end %>

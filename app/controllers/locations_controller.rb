@@ -1,5 +1,5 @@
 class LocationsController < ApplicationController
-
+  respond_to :html, :js
   def destroy
     @post = Post.find(params[:post_id])
     @location = Location.find(params[:id])
@@ -31,22 +31,18 @@ class LocationsController < ApplicationController
   end
 
   def new
-    @post = Post.find(params[:post_id])
     @location = Location.new
     authorize @location
   end
 
   def create
-    @post = Post.find(params[:post_id])
-    @locations = @post.locations
-    @location = Location.build(location_params)
-    @new_location_for_post = @post.locations.build(location_params)
-    @location.post  = @post
+    @location = Location.all.build(location_params)
     @new_location = Location.new
     authorize @location
 
     if @location.save
       flash[:notice] = "Location was saved."
+      redirect_to new_post_path
     else
       flash[:error] = "There was an error saving the location. Please try again."
     end
