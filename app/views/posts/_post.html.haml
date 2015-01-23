@@ -7,7 +7,7 @@
     %small
       = image_tag(post.user.avatar.small.url) if post.user.avatar?
       submitted #{time_ago_in_words(post.created_at)} ago by
-      \#{post.user.name}
+      = link_to post.user.name, post.user
       %br/
       %br/
 
@@ -17,15 +17,18 @@
     %h4
       Tags
     .row
-      .col-md-4
+      .col-md-3
         Locations:
         - post.locations.each do |location|
           =render partial: 'locations/location', locals: {location: location}
-      .col-md-4
+      .col-md-3
         People:
         - post.people.each do |person|
           =render partial: 'people/person', locals: {person: person}
-      .col-md-4
+      .col-md-3
+        Members:
+        =render partial: 'users/user', locals: {user: post.user}
+      .col-md-3
         Date:git
         - post.periods.each do |period|
           =render partial: 'periods/period', locals: {period: period}
