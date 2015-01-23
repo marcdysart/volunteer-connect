@@ -1,0 +1,17 @@
+- content_for :nav_content do
+  %h1
+    = @user.name
+  - if @user.avatar?
+    .large-avatar-photo
+      = image_tag(@user.avatar.profile.url)
+  -else
+    %span.large-avatar.glyphicon.glyphicon-user
+
+- content_for :main_content do
+  .row
+    .col-md-12
+      - @@tagged_posts.each do |post|
+        = render partial: 'posts/post', locals: { post: post }
+        .new-comment
+          = render partial: 'comments/form', locals: {post: post, comment: @comment}
+  = will_paginate @posts
