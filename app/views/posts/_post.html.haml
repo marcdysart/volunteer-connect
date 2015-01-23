@@ -16,15 +16,19 @@
       = link_to post.url_link, post.url_link if post.url_link?
     %h4
       Tags
-    Locations:
-    - post.locations.each do |location|
-      =render partial: 'locations/location', locals: {location: location}
-    People:
-    - post.people.each do |person|
-      =render partial: 'people/person', locals: {person: person}
-    Date:
-    - post.periods.each do |period|
-      =render partial: 'periods/period', locals: {period: period}
+    .row
+      .col-md-4
+        Locations:
+        - post.locations.each do |location|
+          =render partial: 'locations/location', locals: {location: location}
+      .col-md-4
+        People:
+        - post.people.each do |person|
+          =render partial: 'people/person', locals: {person: person}
+      .col-md-4
+        Date:
+        - post.periods.each do |period|
+          =render partial: 'periods/period', locals: {period: period}
     %h4
       Comments:
     .js-comments
