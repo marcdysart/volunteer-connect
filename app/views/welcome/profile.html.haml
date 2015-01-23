@@ -2,7 +2,7 @@
   .row
     .col-md-8
       %h3 Edit personal information
-      = form_for(current_user) do |f|
+      = form_for current_user do |f|
         .form-group
           = f.label :name
           = f.text_field :name, class: 'form-control', placeholder: "Enter name", autofocus: true
@@ -15,10 +15,13 @@
           = f.file_field :avatar
           = f.hidden_field :avatar_cache
         .form-group
-          = f.submit "Update", class: 'btn btn-success'
+          = f.submit "Update", name: 'profile_button', class: 'btn btn-success'
 
 - content_for :nav_content do
   %h1 Edit your Profile
   %h3 This is viewed by all members
-  %p Current avatar
-  = image_tag( current_user.avatar.profile.url )
+  - if current_user.avatar?
+    .large-avatar-photo
+      = image_tag(current_user.avatar.profile.url)
+  -else
+    %span.large-avatar.glyphicon.glyphicon-user

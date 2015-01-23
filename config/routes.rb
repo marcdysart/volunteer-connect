@@ -8,8 +8,8 @@ Rails.application.routes.draw do
     resources :people
     resources :period
     resources :comments, only: [:create, :destroy]
-
   end
+
   resources :posts, except: [:index] do
     resources :locations, only: [:create, :destroy]
     resources :people, only: [:create, :destroy]

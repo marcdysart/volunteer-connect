@@ -1,0 +1,23 @@
+
+
+.left-nav {
+  background: #726f6f;
+  display: block;
+  width: $left_nav_width;
+  position: absolute;
+  top: $top_header_height_adjusted;
+  bottom: 0;
+  left:0px;
+}
+
+.nav-content {
+  overflow: hidden;
+  overflow-y: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 20px;
+  text-align: center;
+}
