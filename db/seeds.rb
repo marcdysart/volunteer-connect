@@ -1,12 +1,13 @@
 require 'faker'
 
 # Create Users
-3.times do
+5.times do
   user = User.new(
 
   name:     Faker::Name.name,
   email:    Faker::Internet.email,
-  password: Faker::Lorem.characters(10)
+  password: Faker::Lorem.characters(10),
+  aboutme:  Faker::Lorem.sentence
   )
   user.skip_confirmation!
   user.save!
@@ -31,10 +32,21 @@ users = User.all
 end
 locations = Location.all
 
-# Create People
-10.times do
+# Create People not linked to a User
+5.times do
   person = Person.new(
   name: Faker::Name.name
+  )
+  person.save!
+end
+
+# Create People linked to a User
+counter = 0
+5.times do
+  counter = counter+1
+  person = Person.new(
+  user: users.find(counter),
+  name: users.find(counter).name
   )
   person.save!
 end
@@ -106,6 +118,7 @@ member.save!
 
 puts "Seed finished"
 puts "#{Location.count} locations created"
+puts "#{Person.count} people created"
 puts "#{User.count} users created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"

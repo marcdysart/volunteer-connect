@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150123181741) do
+ActiveRecord::Schema.define(version: 20150126174709) do
 
   create_table "comments", force: true do |t|
     t.text     "body"
@@ -26,12 +26,9 @@ ActiveRecord::Schema.define(version: 20150123181741) do
 
   create_table "locations", force: true do |t|
     t.string   "name"
-    t.integer  "post_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "locations", ["post_id"], name: "index_locations_on_post_id"
 
   create_table "locations_posts", id: false, force: true do |t|
     t.integer "location_id", null: false
@@ -40,12 +37,12 @@ ActiveRecord::Schema.define(version: 20150123181741) do
 
   create_table "people", force: true do |t|
     t.string   "name"
-    t.integer  "post_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
-  add_index "people", ["post_id"], name: "index_people_on_post_id"
+  add_index "people", ["user_id"], name: "index_people_on_user_id"
 
   create_table "people_posts", id: false, force: true do |t|
     t.integer "person_id", null: false

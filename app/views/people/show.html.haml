@@ -1,6 +1,18 @@
 - content_for :nav_content do
-  %h1
-    = @person.name
+  - if @person.user.nil?
+    %h1
+      = @person.name
+      %span.large-avatar.glyphicon.glyphicon-user
+  - else
+    %h1
+      = @person.user.name
+      - if @person.user.avatar?
+        .large-avatar-photo
+          = image_tag(@person.user.avatar.profile.url)
+      -else
+        %span.large-avatar.glyphicon.glyphicon-user
+    %h3
+      = @person.user.aboutme
 
 - content_for :main_content do
   .row
