@@ -46,9 +46,10 @@
           %li.divider
           %li
             %a#keyword_search{:href => "#"} Keyword
-      .form-group
-        %input.form-control{:placeholder => "Search for people, villages, time periods, and much more..", :type => "text"}/
+      .form-group#the-basics
+        %input.form-control.typeahead{:placeholder => "Search for people, villages, time periods, and much more..", :type => "text"}/
       %button.btn.btn-default.glyphicon.glyphicon-search#search_button{:type => "submit"}
+  
 .row
   .col-lg-3.col-md-4.col-sm-5.col-xs-8
     %ul.nav.nav-tabs
