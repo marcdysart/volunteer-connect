@@ -10,4 +10,10 @@ class Post < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   default_scope { order('created_at DESC') }
+
+  def self.search(query)
+    where("name like ?", "%#{query}%")
+  end
+
+
 end

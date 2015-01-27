@@ -42,7 +42,7 @@ $(document).ready(function(){
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     limit: 10,
     remote: {
-      url: '../locations/1.json',
+      url: 'http://localhost:3000/locations/1.json',
       filter: function (list) {
         // Map the remote source JSON array to a JavaScript object array
         return $.map(list, function (location) {
@@ -61,9 +61,11 @@ $(document).ready(function(){
   // Instantiate the Typeahead UI
   $('#prefetch .typeahead').typeahead(null, {
     displayKey: 'name',
+    minLength: 1
     source: locations.ttAdapter(),
     templates: {
       header: '<h3 class="league-name">Locations</h3>'
     }
   });
+
 });

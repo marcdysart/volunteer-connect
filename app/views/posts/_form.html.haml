@@ -25,25 +25,20 @@
     = f.file_field :image
     = f.hidden_field :image_cache
   .row
-    .col-md-3
+    .col-md-4
       .form-group
         = link_to 'Create a new Location', new_location_path, :class => 'btn btn-primary'
       .form-group
         = f.label 'Choose Locations', class: 'control-label'
         = select_tag('post[location_ids][]', options_from_collection_for_select(Location.all, 'id', 'name'), {:multiple => true, :size => 5})
-    .col-md-3
+    .col-md-4
       .form-group
         = link_to 'Create a new Person', new_person_path, :class => 'btn btn-primary'
       .form-group
         = f.label 'Choose People', class: 'control-label'
         = select_tag('post[person_ids][]', options_from_collection_for_select(Person.all, 'id', 'name'), {:multiple => true, :size => 5})
-    .col-md-3
 
-      .form-group
-        = f.label 'Choose Member', class: 'control-label'
-        = select_tag('post[user_ids][]', options_from_collection_for_select(User.all, 'id', 'name'), {:multiple => true, :size => 5})
-
-    .col-md-3
+    .col-md-4
       .form-group
         = link_to 'Create a new Date', new_period_path, :class => 'btn btn-primary'
       .form-group

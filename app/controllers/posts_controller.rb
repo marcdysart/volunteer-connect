@@ -1,7 +1,10 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all.where("posts.created_at > ?", 7.days.ago).paginate(page: params[:page], per_page: 6)
-    render json: Location.all
+    if params[:search]
+      @posts = Post.all.search(params[:search]).order("created_at DESC")
+    else
+      @posts = Post.all.where("posts.created_at > ?", 7.days.ago).paginate(page: params[:page], per_page: 6)
+    end
   end
 
   def show
@@ -57,6 +60,12 @@ class PostsController < ApplicationController
     end
   end
 
+  def query
+      q = params[:query]
+      @locations = Location.search(name_cont: q).result
+      @people = Person.search(name_cont: q).result
+
+  end
 
   def destroy
     @post = Post.find(params[:id])

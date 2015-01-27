@@ -13,7 +13,11 @@ class LocationsController < ApplicationController
   end
 
   def index
-    @locations = Location.all
+    if params[:search]
+      @locations = Location.search(params[:search]).order("created_at DESC")
+    else
+      @locations = Location.order("created_at DESC")
+    end
   end
 
   def show
@@ -34,6 +38,7 @@ class LocationsController < ApplicationController
     @location = Location.new
     authorize @location
   end
+
 
   def create
     @location = Location.all.build(location_params)

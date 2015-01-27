@@ -4,4 +4,4 @@
 - content_for :main_content do
   - @locations.each do |location|
     %p
-      =location.name
+      =link_to location.name, location

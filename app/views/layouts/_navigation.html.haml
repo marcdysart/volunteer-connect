@@ -46,9 +46,11 @@
           %li.divider
           %li
             %a#keyword_search{:href => "#"} Keyword
-      .form-group#prefetch
-        %input.form-control.typeahead{:placeholder => "Search for people, villages, time periods, and much more..", :type => "text"}/
-      %button.btn.btn-default.glyphicon.glyphicon-search#search_button{:type => "submit"}
+      = form_tag(locations_path, method: "get", class: "formgroup typeahead", id: "prefetch") do
+        = text_field_tag :search, params[:search], class: "form-control typeahead", placeholder: "Search for people, villages, time periods, and much more.."
+        %button.btn.btn-default#search_button{:type => "submit"}
+          %i.glyphicon.glyphicon-search
+
 
 .row
   .col-lg-3.col-md-4.col-sm-5.col-xs-8
