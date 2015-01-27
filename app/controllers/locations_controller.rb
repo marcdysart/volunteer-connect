@@ -16,7 +16,7 @@ class LocationsController < ApplicationController
     if params[:search]
       @locations = Location.search(params[:search]).order("created_at DESC")
     else
-      @locations = Location.order("created_at DESC")
+      @locations = Location.order("name ASC")
     end
   end
 

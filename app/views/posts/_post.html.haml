@@ -4,15 +4,17 @@
       = link_to (post.title), [post]
     %p
       = post.body
-    %small
+      %small
       = image_tag(post.user.avatar.small.url) if post.user.avatar?
       submitted #{time_ago_in_words(post.created_at)} ago by
       = link_to post.user.name, post.user.person
       %br/
       %br/
-
-      = image_tag(post.image.large) if post.image?
-
+      .row
+        .col-md-6
+          = image_tag(post.image.large) if post.image?
+        .col-md-6
+          %img{:src => "https://maps.googleapis.com/maps/api/staticmap?center=Labe,Guinea&zoom=7&size=400x400&markers=color:blue%7Clabel:A%7C11.3196146,-12.2898817"}
       = link_to post.url_link, post.url_link if post.url_link?
     %h4
       Tags

@@ -42,7 +42,7 @@ $(document).ready(function(){
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     limit: 10,
     remote: {
-      url: 'http://localhost:3000/locations/1.json',
+      url: '../locations/1.json',
       filter: function (list) {
         // Map the remote source JSON array to a JavaScript object array
         return $.map(list, function (location) {
