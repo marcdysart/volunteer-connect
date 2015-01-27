@@ -1,0 +1,7 @@
+- content_for :nav_content do
+  %h1 All Locations
+
+- content_for :main_content do
+  - @locations.each do |location|
+    %p
+      =location.name

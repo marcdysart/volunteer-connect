@@ -4,7 +4,7 @@
 
 - content_for :main_content do
   .row
-    .col-md-8
+    .col-md-10
       = render partial: 'post', locals: { post: @post }
 
       .new-comment
@@ -12,7 +12,7 @@
 
 
 
-    .col-md-4
+    .col-md-2
       - if policy(@post).edit?
         = link_to "Edit", edit_post_path( @post), class: 'btn btn-success'
       - if policy(@post).destroy?

@@ -13,13 +13,12 @@ class LocationsController < ApplicationController
   end
 
   def index
-    @post = Post.find(params[:post_id])
-    @location = Location.new
-    @locations = @post.locations
+    @locations = Location.all
   end
 
   def show
     @location = Location.find(params[:id])
+    @locations = Location.all
     @posts = @location.posts.paginate(page: params[:page], per_page: 6)
     @comment = Comment.new
     authorize @location

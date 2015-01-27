@@ -1,0 +1,6 @@
+{
+  "name": "volunteer-connect",
+  "dependencies": {
+    "typeahead": "0.10.5"
+  }
+}

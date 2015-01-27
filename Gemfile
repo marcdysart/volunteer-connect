@@ -53,3 +53,5 @@ gem 'will_paginate', '~> 3.0.5'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
+gem "bower-rails", "~> 0.9.1"
+gem 'bootstrap-typeahead-rails', '~> 0.10.5.1'

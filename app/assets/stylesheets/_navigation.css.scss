@@ -65,7 +65,7 @@ $left_nav_width_adjusted: $left_nav_width + 15px;
   height: 50px;
   vertical-align: middle;
 }
-
+// CSS for typeahead in Navigation Search
 
 .typeahead,
 .tt-query,
@@ -131,6 +131,7 @@ $left_nav_width_adjusted: $left_nav_width + 15px;
   margin: 0;
 }
 
+// Make Navigation Bar be responsive
 
 @media screen and (max-width : 750px){
 
