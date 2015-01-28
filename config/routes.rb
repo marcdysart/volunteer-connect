@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :people
     resources :period
     resources :comments, only: [:create, :destroy]
+    post '/likes-count' => 'likes#likes_count', as: :likes_count
   end
 
   resources :posts, except: [:index] do
@@ -27,4 +28,6 @@ Rails.application.routes.draw do
   get 'search' => 'welcome#search'
 
     root to: 'welcome#index'
+
+
 end

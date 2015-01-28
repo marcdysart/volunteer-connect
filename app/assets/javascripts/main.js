@@ -61,7 +61,7 @@ $(document).ready(function(){
   // Instantiate the Typeahead UI
   $('#prefetch .typeahead').typeahead(null, {
     displayKey: 'name',
-    minLength: 1
+    minLength: 1,
     source: locations.ttAdapter(),
     templates: {
       header: '<h3 class="league-name">Locations</h3>'

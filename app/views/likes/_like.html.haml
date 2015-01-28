@@ -1,0 +1,5 @@
+- if policy(Like.new).create?
+  .like-hand.pull-left
+    = link_to " ", post_likes_count_path(post), class: "glyphicon glyphicon-thumbs-up #{(current_user.liked(post) && current_user.liked(post).likes_count?) ? 'liked' : '' }", method: :post
+    %small
+      = pluralize(post.likes_count, 'like')

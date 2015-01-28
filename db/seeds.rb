@@ -11,6 +11,7 @@ require 'faker'
   )
   user.skip_confirmation!
   user.save!
+
 end
 users = User.all
 
@@ -71,6 +72,10 @@ periods = Period.all
   people: [people.sample,people.sample],
   periods: [periods.sample]
   )
+
+  # set the created_at to a time within the past year
+ post.update_attributes!(created_at: rand(10.minutes .. 1.year).ago)
+ post.update_rank
 
 end
 posts = Post.all

@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :users, dependent: :destroy
+  has_many :likes, dependent: :destroy
   has_one :person
 
   mount_uploader :avatar, AvatarUploader
@@ -15,5 +17,9 @@ class User < ActiveRecord::Base
 
    def member?
      role == 'member'
+   end
+
+   def liked(post)
+     likes.where(post_id: post.id).first
    end
 end

@@ -32,6 +32,7 @@
         - post.periods.each do |period|
           =render partial: 'periods/period', locals: {period: period}
     %h4
+      = render partial: 'likes/like', locals: {post: post}
       Comments:
     .js-comments
       - post.comments.each do |comment|
