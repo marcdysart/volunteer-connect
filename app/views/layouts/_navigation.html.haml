@@ -8,11 +8,14 @@
         - if current_user
           %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
             - if current_user.avatar?
-              = image_tag(current_user.avatar.small.url)
-              %span.caret
-            - else
-              %span.btn.glyphicon.glyphicon-user
+              %span.small-avatar-photo
                 %span.caret
+                  = image_tag(current_user.avatar.small.url)
+
+            - else
+              %span.small-avatar
+                .btn.glyphicon.glyphicon-user
+              %span.caret
           %ul.dropdown-menu#log_in{:role => "menu"}
             %li
               =link_to edit_user_registration_path, class: 'btn btn-primary btn-sm' do
@@ -31,7 +34,7 @@
               = link_to "Sign Up", new_user_registration_path
 
   .col-lg-7.col-lg-pull-2.col-md-9.col-md-pull-2.col-sm-8.col-sm-pull-2.col-xs-12
-    %form.navbar-form.navbar-left{:role => "search"}
+    = form_tag(search_path, method: :post, class: "navbar-form navbar-left", id: "prefetch", :role => "search") do
       %button.dropdown.btn.btn-default#search_menu_button
         %a.btn-default.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
           %span.btn.glyphicon.glyphicon-th-list#search_button_name
@@ -46,10 +49,10 @@
           %li.divider
           %li
             %a#keyword_search{:href => "#"} Keyword
-      = form_tag(locations_path, method: "get", class: "formgroup typeahead", id: "prefetch") do
-        = text_field_tag :search, params[:search], class: "form-control typeahead", placeholder: "Search for people, villages, time periods, and much more.."
-        %button.btn.btn-default#search_button{:type => "submit"}
-          %i.glyphicon.glyphicon-search
+      = hidden_field_tag :search_type, 'location'
+      = text_field_tag :search, params[:search], class: "form-control typeahead", placeholder: "Search for people, villages, time periods, and much more.."
+      %button.btn.btn-default#search_button{:type => "submit"}
+        %i.glyphicon.glyphicon-search
 
 
 .row

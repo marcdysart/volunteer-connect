@@ -65,6 +65,31 @@ $left_nav_width_adjusted: $left_nav_width + 15px;
   height: 50px;
   vertical-align: middle;
 }
+
+// Small Avatar Photo in Nab bar
+
+.small-avatar {
+  font-size: 3em;
+  line-height: .5em;
+  text-align: right;
+  border-radius: 50%;
+  background: white;
+}
+
+.small-avatar .glyphicon-user{
+
+}
+
+
+.small-avatar-photo img {
+  font-size: 5em;
+  text-align: center;
+  left: 50%;
+  border-radius: 50%;
+  height: 1em;
+  width: 1em;
+  background: white;
+}
 // CSS for typeahead in Navigation Search
 
 .typeahead,

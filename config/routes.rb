@@ -20,12 +20,13 @@ Rails.application.routes.draw do
   resources :locations
   resources :people
   resources :periods
+
   get 'json/data'
   get 'welcome/index'
 
   get 'about' => 'welcome#about'
   get 'profile' => 'welcome#profile'
-  get 'search' => 'welcome#search'
+  post 'search' => 'search#results', :as => 'search'
 
     root to: 'welcome#index'
 

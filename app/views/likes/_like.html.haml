@@ -2,4 +2,6 @@
   .like-hand.pull-left
     = link_to " ", post_likes_count_path(post), class: "glyphicon glyphicon-thumbs-up #{(current_user.liked(post) && current_user.liked(post).likes_count?) ? 'liked' : '' }", method: :post
     %small
-      = pluralize(post.likes_count, 'like')
+      - if (post.likes.count > 0)
+        = pluralize(post.likes_count, 'Person')
+        likes this.
