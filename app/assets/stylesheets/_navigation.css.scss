@@ -92,6 +92,11 @@ $left_nav_width_adjusted: $left_nav_width + 15px;
 }
 // CSS for typeahead in Navigation Search
 
+
+#prefetch .tt-dropdown-menu {
+  max-height: 150px;
+  overflow-y: auto;
+}
 .typeahead,
 .tt-query,
 .tt-hint {

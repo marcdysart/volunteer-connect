@@ -13,9 +13,11 @@ class PeopleController < ApplicationController
   end
 
   def index
-    @post = Post.find(params[:post_id])
-    @person = Person.new
-    @people = @post.people
+    if params[:search]
+      @people = Person.search(params[:search]).order("created_at DESC")
+    else
+      @people = Person.order("name ASC")
+    end
   end
 
   def show

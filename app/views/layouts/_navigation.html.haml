@@ -43,13 +43,14 @@
           %li
             %a#all_search{:href => "#"} All
           %li
-            %a#location_search{:href => "#"} Location
+            %a#location_search{:href => "#", :search_type => 'location'} Location
+          %li
+            %a#person_search{:href => "#", :search_type => 'person'} Person
           %li
             %a#time_search{:href => "#"} Time Period
           %li.divider
           %li
             %a#keyword_search{:href => "#"} Keyword
-      = hidden_field_tag :search_type, 'location'
       = text_field_tag :search, params[:search], class: "form-control typeahead", placeholder: "Search for people, villages, time periods, and much more.."
       %button.btn.btn-default#search_button{:type => "submit"}
         %i.glyphicon.glyphicon-search

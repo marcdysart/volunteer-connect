@@ -9,7 +9,11 @@ $(document).ready(function(){
     });
     $('#location_search').click(function(ev) {
       console.log("Location is clicked");
-      $('#search_button_name').replaceWith("<span class= 'btn' id='search_button_name'>Location <span class='caret'></span></span>");
+      $('#search_button_name').replaceWith("<span class= 'btn' id='search_button_name'>Location <span class='caret'></span></span><input id='search_type' name='search_type' type='hidden' value='location'>");
+    });
+    $('#person_search').click(function(ev) {
+      console.log("Person is clicked");
+      $('#search_button_name').replaceWith("<span class= 'btn' id='search_button_name'>Person <span class='caret'></span></span><input id='search_type' name='search_type' type='hidden' value='person'>");
     });
     $('#time_search').click(function(ev) {
       console.log("Time is clicked")
@@ -54,18 +58,50 @@ $(document).ready(function(){
     }
   });
 
+  var people = new Bloodhound({
+    datumTokenizer: function (datum) {
+      return Bloodhound.tokenizers.whitespace(datum.name);
+    },
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    limit: 10,
+    remote: {
+      url: '../people.json',
+      filter: function (list) {
+        // Map the remote source JSON array to a JavaScript object array
+        return $.map(list, function (person) {
+          return {
+            name: person.name
+          };
+        });
+      }
+    }
+  });
+
   // Initialize the Bloodhound suggestion engine
   locations.initialize();
+  people.initialize();
 
 
   // Instantiate the Typeahead UI
-  $('#prefetch .typeahead').typeahead(null, {
+  $('#prefetch .typeahead').typeahead({
+    hint: true,
+    highlight: true,
+    minLength: 1},
+    {
+    name: 'locations',
     displayKey: 'name',
     minLength: 1,
     source: locations.ttAdapter(),
     templates: {
-      header: '<h3 class="league-name">Locations</h3>'
-    }
+      header: '<h3 class="league-name">Locations</h3>'}
+    },
+    {
+    name: 'people',
+    displayKey: 'name',
+    minLength: 1,
+    source: people.ttAdapter(),
+    templates: {
+      header: '<h3 class="league-name">People</h3>'}
   });
 
 });
