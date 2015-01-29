@@ -1,6 +1,9 @@
 class SearchController < ApplicationController
   def results
     case params['search_type']
+    when 'period'
+        period = Period.search_start(params[:search]).order("created_at DESC").first
+        redirect_to period
     when 'person'
         person = Person.search(params[:search]).order("created_at DESC").first
         redirect_to person

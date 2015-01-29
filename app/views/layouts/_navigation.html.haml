@@ -47,11 +47,16 @@
           %li
             %a#person_search{:href => "#", :search_type => 'person'} Person
           %li
-            %a#time_search{:href => "#"} Time Period
+            %a#period_search{:href => "#"} Time Period
           %li.divider
           %li
             %a#keyword_search{:href => "#"} Keyword
-      = text_field_tag :search, params[:search], class: "form-control typeahead", placeholder: "Search for people, villages, time periods, and much more.."
+
+      - if :search_type == 'period'
+        = render partial: 'layouts/time_search'
+      - else
+        = text_field_tag :search, params[:search], class: "form-control typeahead", placeholder: "Search for people, villages, time periods, and much more.."
+
       %button.btn.btn-default#search_button{:type => "submit"}
         %i.glyphicon.glyphicon-search
 

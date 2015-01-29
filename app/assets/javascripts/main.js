@@ -15,9 +15,9 @@ $(document).ready(function(){
       console.log("Person is clicked");
       $('#search_button_name').replaceWith("<span class= 'btn' id='search_button_name'>Person <span class='caret'></span></span><input id='search_type' name='search_type' type='hidden' value='person'>");
     });
-    $('#time_search').click(function(ev) {
+    $('#period_search').click(function(ev) {
       console.log("Time is clicked")
-      $('#search_button_name').replaceWith("<span class= 'btn' id='search_button_name'>Time <span class='caret'></span></span>");
+      $('#search_button_name').replaceWith("<span class= 'btn' id='search_button_name'>Time Period<span class='caret'></span></span><input id='search_type' name='search_type' type='hidden' value='period'>");
     });
     $('#keyword_search').click(function(ev) {
       console.log("Keyword is clicked")

@@ -1,0 +1,7 @@
+- content_for :nav_content do
+  %h1 All Periods
+
+- content_for :main_content do
+  - @periods.each do |period|
+    %p
+      =link_to period.start, period

@@ -12,11 +12,16 @@ class PeriodsController < ApplicationController
     end
   end
 
+
+
   def index
-    @post = Post.find(params[:post_id])
-    @period = Period.new
-    @periods = @post.periods
+    if params[:search]
+      @periods = Period.find(:all, :conditions => ["start_date between ? and ?", Period.start, Period.end])
+    else
+      @periods = Period.order("start ASC")
+    end
   end
+
 
   def show
     @period = Period.find(params[:id])
