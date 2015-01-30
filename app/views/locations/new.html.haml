@@ -2,7 +2,16 @@
   %h1 Add a New Location
 
 - content_for :main_content do
+
+  %script{:src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyCWDYd8haZXygQBD-YxNDCuaxCakY8Ikh4"}
+
   .col-md-8
+    #panel
+      %input#address{:type => "textbox", :value => "Conakry, Guinea"}/
+      %input{:id => 'find_location',:type => "button", :value => "Search"}/
+    #panel-delete-markers
+      %input{:id => 'delete_markers', :type => "button", :value => "Delete Markers"}/
+    #map-canvas
     = form_for @location do |f|
       %form.form-inline{:role => "form"}
         .form-group
