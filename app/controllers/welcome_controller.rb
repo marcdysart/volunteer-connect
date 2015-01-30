@@ -3,7 +3,7 @@ class WelcomeController < ApplicationController
     unless user_signed_in?
       render 'logged_out_homepage', layout: 'logged_out' and return
     else
-      @posts = Post.all.where("posts.created_at > ?", 7.days.ago).paginate(page: params[:page], per_page: 6)
+      @posts = Post.all.paginate(page: params[:page], per_page: 6)
       @locations = Location.all
       render 'posts/index', layout: 'application' and return
     end

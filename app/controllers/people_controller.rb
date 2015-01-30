@@ -21,7 +21,6 @@ class PeopleController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
     @person = Person.find(params[:id])
     @posts = @person.posts.paginate(page: params[:page], per_page: 6)
     @comment = Comment.new

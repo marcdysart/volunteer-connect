@@ -14,7 +14,7 @@
         .col-md-6
           = image_tag(post.image.large) if post.image?
         .col-md-6
-          %img{:src => "https://maps.googleapis.com/maps/api/staticmap?center=Labe,Guinea&zoom=7&size=400x400&markers=color:blue%7Clabel:A%7C11.3196146,-12.2898817"}
+          %img{:src => "https://maps.googleapis.com/maps/api/staticmap?&zoom=7&size=400x400&markers=color:blue%7Clabel:A%7C#{post.locations.first.latitude},#{post.locations.first.longitude}"}
       = link_to post.url_link, post.url_link if post.url_link?
     %h4
       Tags

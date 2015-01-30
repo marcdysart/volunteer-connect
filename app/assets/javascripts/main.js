@@ -104,4 +104,27 @@ $(document).ready(function(){
       header: '<h3 class="league-name">People</h3>'}
   });
 
+
+
+  // bootstrapTags Inputs
+  $('#locationInputForm').tagsinput({
+    typeaheadjs: {
+      name: 'locations',
+      displayKey: 'name',
+      source: locations.ttAdapter()
+    }
+  });
+
+
+
+  $('#peopleInputForm').tagsinput({
+    typeaheadjs: {
+      name: 'people',
+      displayKey: 'name',
+      source: people.ttAdapter()
+    }
+  });
+
+
+
 });

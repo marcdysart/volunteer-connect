@@ -44,10 +44,19 @@
       .form-group
         = f.label 'Choose Date', class: 'control-label'
         = select_tag('post[period_ids][]', options_from_collection_for_select(Period.all, 'id', 'start'), {:multiple => true, :size => 5})
+  .row
+    .col-md-6
+      = f.label 'Choose Locations', class: 'control-label'
+      = text_field_tag('post[location_ids][]', nil, id: "locationInputForm", class: "form-control typeahead", placeholder: "Locations..")
+    .col-md-6
+      = f.label 'Choose People', class: 'control-label'
+      = text_field_tag('post[person_ids][]', nil, id: "personInputForm", class: "form-control typeahead", placeholder: "People..")
 
-      .form-group
-        = link_to "Cancel", :back, class: 'btn btn-default'
-        = f.submit "Save", class: 'btn btn-success'
+  .form-group
+    = link_to "Cancel", :back, class: 'btn btn-default'
+    = f.submit "Save", class: 'btn btn-success'
+
+
 
   -# .dropdown
   -#   %button.btn.btn-default#dropdownLocation.dropdown-toggle{"aria-expanded" => "true", "data-toggle" => "dropdown", :type => "button"}

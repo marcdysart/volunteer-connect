@@ -7,12 +7,26 @@ require 'faker'
   name:     Faker::Name.name,
   email:    Faker::Internet.email,
   password: Faker::Lorem.characters(10),
-  aboutme:  Faker::Lorem.sentence
+  aboutme:  Faker::Lorem.sentence,
+  avatar: Faker::Avatar.image
   )
   user.skip_confirmation!
   user.save!
 
 end
+
+
+# Create a member
+member = User.new(
+name:     'Member User',
+email:    'member@example.com',
+password: 'helloworld',
+role: 'member',
+aboutme: 'I am a regular member'
+)
+member.skip_confirmation!
+member.save!
+
 users = User.all
 
 # Note: by calling `User.new` instead of `create`,
@@ -27,10 +41,27 @@ users = User.all
 # Create Locations
 10.times do
   location = Location.new(
-  name: Faker::Address.city
+  name: Faker::Address.city,
+  latitude: 10.3794261,
+  longitude: -9.3050495
   )
   location.save!
 end
+
+labe = Location.new(
+  name: 'Labe',
+  latitude: 11.3196146,
+  longitude: -12.2898817
+)
+labe.save!
+
+conakry = Location.new(
+  name: 'Conakry',
+  latitude: 9.6355819,
+  longitude: -13.5787382
+)
+conakry.save!
+
 locations = Location.all
 
 # Create People not linked to a User
@@ -43,7 +74,7 @@ end
 
 # Create People linked to a User
 counter = 0
-5.times do
+6.times do
   counter = counter+1
   person = Person.new(
   user: users.find(counter),
@@ -108,17 +139,6 @@ role: 'admin'
 )
 admin.skip_confirmation!
 admin.save!
-
-
-# Create a member
-member = User.new(
-name:     'Member User',
-email:    'member@example.com',
-password: 'helloworld',
-role: 'member'
-)
-member.skip_confirmation!
-member.save!
 
 
 puts "Seed finished"

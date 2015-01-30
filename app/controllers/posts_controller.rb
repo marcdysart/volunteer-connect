@@ -3,7 +3,7 @@ class PostsController < ApplicationController
     if params[:search]
       @posts = Post.all.search(params[:search]).order("created_at DESC")
     else
-      @posts = Post.all.where("posts.created_at > ?", 7.days.ago).paginate(page: params[:page], per_page: 6)
+      @posts = Post.all.paginate(page: params[:page], per_page: 6)
     end
   end
 
