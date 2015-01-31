@@ -23,6 +23,11 @@ $left_nav_width_adjusted: $left_nav_width + 15px;
   display: inline-block;
 }
 
+// Fix search alignment
+.form-control {
+  top: -15px !important;
+}
+
 .left-nav {
   background: #726f6f;
   display: block;
