@@ -8,6 +8,21 @@ $left_nav_width_adjusted: $left_nav_width + 15px;
   text-align: center;
 }
 
+// Time Search
+.close {
+  display: none !important;
+}
+
+.to_search {
+  width: 100px !important;
+  display: inline-block;
+}
+
+.from_search {
+  width: 100px !important;
+  display: inline-block;
+}
+
 .left-nav {
   background: #726f6f;
   display: block;

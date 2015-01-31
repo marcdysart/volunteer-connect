@@ -2,25 +2,36 @@ $(document).ready(function(){
 
   // This changes the dropdown for search in the navigation
   $('#search_menu_button').on('show.bs.dropdown', function () {
-    console.log("Search is clicked");
+
     $('#all_search').click(function(ev) {
-      console.log("All is clicked");
+
       $('#search_button_name').replaceWith("<span class= 'btn' id='search_button_name'>All <span class='caret'></span></span>");
     });
     $('#location_search').click(function(ev) {
-      console.log("Location is clicked");
       $('#search_button_name').replaceWith("<span class= 'btn' id='search_button_name'>Location <span class='caret'></span></span><input id='search_type' name='search_type' type='hidden' value='location'>");
+      $( '#search_bar' ).parent().removeClass('close');
+      $('#time_search_to').addClass('close');
+      $('#time_search_from').addClass('close');
+      $('#search_to_tag').addClass('close');
     });
     $('#person_search').click(function(ev) {
-      console.log("Person is clicked");
       $('#search_button_name').replaceWith("<span class= 'btn' id='search_button_name'>Person <span class='caret'></span></span><input id='search_type' name='search_type' type='hidden' value='person'>");
+      $( '#search_bar' ).parent().removeClass('close');
+      $('#time_search_to').addClass('close');
+      $('#time_search_from').addClass('close');
+      $('#search_to_tag').addClass('close');
     });
     $('#period_search').click(function(ev) {
-      console.log("Time is clicked")
       $('#search_button_name').replaceWith("<span class= 'btn' id='search_button_name'>Time Period<span class='caret'></span></span><input id='search_type' name='search_type' type='hidden' value='period'>");
+      console.log("Period Search is clicked");
+      ev.preventDefault();
+      $( '#search_bar' ).parent().addClass('close');
+      $('#time_search_to').removeClass('close');
+      $('#time_search_from').removeClass('close');
+      $('#search_to_tag').removeClass('close');
+
     });
     $('#keyword_search').click(function(ev) {
-      console.log("Keyword is clicked")
       $('#search_button_name').replaceWith("<span class= 'btn' id='search_button_name'>Keyword <span class='caret'></span></span>");
     });
   });

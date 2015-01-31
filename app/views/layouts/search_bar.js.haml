@@ -1,0 +1,5 @@
+// This will change the search bar when Period is clicked in the NavBar
+$('#period_search').click(function(ev) {
+  console.log('Search Bar can change');
+  $('#search_bar').replaceWith("= escape_javascript(render partial: 'layouts/time_search') ");
+});
