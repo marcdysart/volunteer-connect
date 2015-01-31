@@ -30,27 +30,21 @@
         = link_to 'Create a new Location', new_location_path, :class => 'btn btn-primary'
       .form-group
         = f.label 'Choose Locations', class: 'control-label'
-        = select_tag('post[location_ids][]', options_from_collection_for_select(Location.all, 'id', 'name'), {:multiple => true, :size => 5})
+        = select_tag('post[location_ids][]', options_from_collection_for_select(Location.all, 'id', 'name' ), {:class => 'location', :id => '#locationInputForm',:multiple => true, :style => "display: none;"})
     .col-md-4
       .form-group
         = link_to 'Create a new Person', new_person_path, :class => 'btn btn-primary'
       .form-group
         = f.label 'Choose People', class: 'control-label'
-        = select_tag('post[person_ids][]', options_from_collection_for_select(Person.all, 'id', 'name'), {:multiple => true, :size => 5})
+        = select_tag('post[person_ids][]', options_from_collection_for_select(Person.all, 'id', 'name' ), {:id => '#peopleInputForm',:multiple => true})
 
     .col-md-4
       .form-group
         = link_to 'Create a new Date', new_period_path, :class => 'btn btn-primary'
       .form-group
         = f.label 'Choose Date', class: 'control-label'
-        = select_tag('post[period_ids][]', options_from_collection_for_select(Period.all, 'id', 'start'), {:multiple => true, :size => 5})
-  .row
-    .col-md-6
-      = f.label 'Choose Locations', class: 'control-label'
-      = text_field_tag('post[location_ids][]', nil, id: "locationInputForm", class: "form-control typeahead", placeholder: "Locations..")
-    .col-md-6
-      = f.label 'Choose People', class: 'control-label'
-      = text_field_tag('post[person_ids][]', nil, id: "personInputForm", class: "form-control typeahead", placeholder: "People..")
+        = select_tag('post[period_ids][]', options_from_collection_for_select(Period.all, 'start', 'id' ), {:multiple => true})
+
 
   .form-group
     = link_to "Cancel", :back, class: 'btn btn-default'

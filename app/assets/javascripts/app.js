@@ -51,7 +51,8 @@ $(document).ready(function(){
         // Map the remote source JSON array to a JavaScript object array
         return $.map(list, function (location) {
           return {
-            name: location.name
+            name: location.name,
+            id: location.id
           };
         });
       }
@@ -105,9 +106,13 @@ $(document).ready(function(){
   });
 
 
-
   // bootstrapTags Inputs
-  $('#locationInputForm').tagsinput({
+
+  var pep = $('select');
+
+  pep.tagsinput({
+    itemValue: 'id',
+    itemText: 'name',
     typeaheadjs: {
       name: 'locations',
       displayKey: 'name',
@@ -115,15 +120,17 @@ $(document).ready(function(){
     }
   });
 
+  // pep.tagsinput({
+  //   itemValue: 'id',
+  //   itemText: 'name',
+  //   typeaheadjs: {
+  //     highlight: true,
+  //     name: 'people',
+  //     displayKey: 'name',
+  //     source: people.ttAdapter()
+  //   }
+  // });
 
-
-  $('#peopleInputForm').tagsinput({
-    typeaheadjs: {
-      name: 'people',
-      displayKey: 'name',
-      source: people.ttAdapter()
-    }
-  });
 
 
 //Google Maps v3
