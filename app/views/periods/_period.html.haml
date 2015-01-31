@@ -1,6 +1,6 @@
 = content_tag :div, class: 'media', id: "period-#{period.id}" do
   .media-body
     %p
-      = link_to period.start.to_formatted_s(:year), period
+      = link_to period.start.to_formatted_s(:year), period, class: 'tag label label-info'
       - if policy(period).destroy?
         | #{link_to "Remove Person", [period.post, period], method: :delete, remote: true}

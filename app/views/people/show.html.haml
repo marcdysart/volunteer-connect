@@ -1,9 +1,11 @@
 - content_for :nav_content do
   - if @person.user.nil?
+    = link_to @person.name, @person, class: 'tag label label-info'
     %h1
       = @person.name
       %span.large-avatar.glyphicon.glyphicon-user
   - else
+    = link_to @person.user.name, @person, class: 'tag label label-info'
     %h1
       = @person.user.name
       - if @person.user.avatar?
