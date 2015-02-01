@@ -9,9 +9,9 @@
           = f.label :"Enter New Period"
           .row
             .col-md-6
-              = f.date_select :start, class: 'form-control', placeholder: "Enter New Period"
+              = f.date_select :start, class: 'form-control', placeholder: "Enter New Period", start_year: 1961
               %h4 to
-              = f.date_select :end, class: 'form-control', placeholder: "Enter New Period"
+              = f.date_select :end, class: 'form-control', placeholder: "Enter New Period", start_year: 1961
             .col-md-3
               = f.submit "Save Period", class: 'btn btn-success'
             .col-md-3

@@ -52,7 +52,8 @@
           %li
             %a#keyword_search{:href => "#"} Keyword
       = render partial: 'layouts/time_search'
-      = text_field_tag :search, params[:search], id: "search_bar", class: "form-control typeahead", placeholder: "Search for people, villages, time periods, and much more.."
+
+      = text_field_tag :search, params[:search], id: "search_bar", class: "typeahead", placeholder: "Search ."
 
 
       %button.btn.btn-default#search_button{:type => "submit"}

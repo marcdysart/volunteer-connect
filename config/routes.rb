@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
   get 'json/data'
   get 'welcome/index'
-
+  get 'test' => 'welcome#test'
   get 'about' => 'welcome#about'
   get 'profile' => 'welcome#profile'
   post 'search' => 'search#results', :as => 'search'

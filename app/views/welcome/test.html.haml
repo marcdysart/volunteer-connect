@@ -1,0 +1,8 @@
+- content_for :nav_content do
+  %h1 Test
+
+- content_for :main_content do
+  %form#testlocation
+    %label{:for => "testlocation"} Location
+    %input#testlocation.typeahead{:type => "text"}/
+    %br/

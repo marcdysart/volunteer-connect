@@ -28,6 +28,11 @@ $left_nav_width_adjusted: $left_nav_width + 15px;
   top: -15px !important;
 }
 
+input.typeahead.tt-hint {
+  opacity: 0 !important;
+}
+
+
 .left-nav {
   background: #726f6f;
   display: block;

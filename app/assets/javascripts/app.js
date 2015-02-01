@@ -23,8 +23,6 @@ $(document).ready(function(){
     });
     $('#period_search').click(function(ev) {
       $('#search_button_name').replaceWith("<span class= 'btn' id='search_button_name'>Time Period<span class='caret'></span></span><input id='search_type' name='search_type' type='hidden' value='period'>");
-      console.log("Period Search is clicked");
-      ev.preventDefault();
       $( '#search_bar' ).parent().addClass('close');
       $('#time_search_to').removeClass('close');
       $('#time_search_from').removeClass('close');
@@ -82,47 +80,150 @@ $(document).ready(function(){
         // Map the remote source JSON array to a JavaScript object array
         return $.map(list, function (person) {
           return {
-            name: person.name
+            name: person.name,
+            id: person.id
           };
         });
       }
     }
   });
 
+  var substringMatcher = function(strs) {
+  return function findMatches(q, cb) {
+    var matches, substrRegex;
+
+    // an array that will be populated with substring matches
+    matches = [];
+
+    // regex used to determine if a string contains the substring `q`
+    substrRegex = new RegExp(q, 'i');
+
+    // iterate through the pool of strings and for any string that
+    // contains the substring `q`, add it to the `matches` array
+    $.each(strs, function(i, str) {
+      if (substrRegex.test(str)) {
+        // the typeahead jQuery plugin expects suggestions to a
+        // JavaScript object, refer to typeahead docs for more info
+        matches.push({ value: str });
+      }
+    });
+
+    cb(matches);
+  };
+};
+  var periods = ['1961', '1962', '1963', '1964', '1965', '1966', '1967', '1968', '1969',
+  '1970', '1971', '1972', '1973', '1974', '1975', '1976', '1977', '1978', '1979',
+  '1980', '1981', '1982', '1983', '1984', '1985', '1986', '1987', '1988', '1989',
+  '1990','1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999',
+  '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009',
+  '2010', '2011', '2012', '2013', '2014', '2015'];
+
+
+  $('#time_search_to.typeahead').typeahead({
+  hint: true,
+  highlight: true,
+  minLength: 1
+},
+{
+  name: 'periods',
+  displayKey: 'value',
+  source: substringMatcher(periods)
+});
+
+$('#time_search_from.typeahead').typeahead({
+hint: true,
+highlight: true,
+minLength: 1
+},
+{
+name: 'periods',
+displayKey: 'value',
+source: substringMatcher(periods)
+});
+
   // Initialize the Bloodhound suggestion engine
   locations.initialize();
   people.initialize();
 
+  var locationsTypeahead = $('#prefetchlocation.typeahead');
+  var peopleTypeahead = $('#prefetchpeople.typeahead');
+  var searchTypeahead = $('#search_bar.typeahead');
+
 
   // Instantiate the Typeahead UI
-  $('#prefetch .typeahead').typeahead({
-    hint: true,
+
+  searchTypeahead.typeahead({
     highlight: true,
-    minLength: 1},
-    {
+  },{
     name: 'locations',
     displayKey: 'name',
-    minLength: 1,
     source: locations.ttAdapter(),
     templates: {
       header: '<h3 class="league-name">Locations</h3>'}
-    },
-    {
+  },
+  {
     name: 'people',
     displayKey: 'name',
-    minLength: 1,
     source: people.ttAdapter(),
     templates: {
       header: '<h3 class="league-name">People</h3>'}
   });
 
 
+
+
+
+  locationsTypeahead.typeahead({
+    highlight: true,
+  },{
+    name: 'locations',
+    displayKey: 'name',
+    source: locations.ttAdapter()
+  });
+
+  peopleTypeahead.typeahead({
+    highlight: true
+  },{
+    name: 'people',
+    displayKey: 'name',
+    source: people.ttAdapter()
+  });
+
+  var locationsItemSelectedHandler = function (eventObject, suggestionObject, suggestionDataset) {
+      /* According to the documentation the following should work https://github.com/twitter/typeahead.js/blob/master/doc/jquery_typeahead.md#jquerytypeaheadval-val.
+      However it causes the suggestion to appear which is not wanted */
+      //employeeIdTypeahead.typeahead('val', suggestionObject.id);
+      peopleTypeahead.val(suggestionObject.id);
+  };
+
+  var peopleItemSelectedHandler = function (eventObject, suggestionObject, suggestionDataset) {
+      /* See comment in previous method */
+      //employeeNameTypeahead.typeahead('val', suggestionObject.name);
+      locationsTypeahead.val(suggestionObject.name);
+  };
+
+  // Associate the typeahead:selected event with the bespoke handler
+  locationsTypeahead.on('typeahead:selected', locationsItemSelectedHandler);
+  peopleTypeahead.on('typeahead:selected', peopleItemSelectedHandler);
+
+
   // bootstrapTags Inputs
 
-  var pep = $('select');
+  // var loc = $('select');
+  //
+  // loc.tagsinput({
+  //   itemValue: 'id',
+  //   itemText: 'name',
+  //   typeaheadjs: {
+  //     name: 'locations',
+  //     displayKey: 'name',
+  //     source: locations.ttAdapter()
+  //   }
+  // });
 
-  pep.tagsinput({
-    itemValue: 'id',
+  var ser= $('input#search_bar')
+  ser.tagsinput({
+    itemValue: 'name',
     itemText: 'name',
     typeaheadjs: {
       name: 'locations',
@@ -131,6 +232,7 @@ $(document).ready(function(){
     }
   });
 
+  // var pep = $('select');
   // pep.tagsinput({
   //   itemValue: 'id',
   //   itemText: 'name',
