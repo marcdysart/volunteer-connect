@@ -24,6 +24,12 @@
     = f.label :image
     = f.file_field :image
     = f.hidden_field :image_cache
+
+  = f.fields_for :post_attachments do |p|
+    .field
+      = p.label :image
+      %br/
+      = p.file_field :image, :multiple => true, name: "post_attachments[image][]"
   .row
     .col-md-4
       .form-group

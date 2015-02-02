@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150130042903) do
+ActiveRecord::Schema.define(version: 20150202154427) do
 
   create_table "comments", force: true do |t|
     t.text     "body"
@@ -89,6 +89,13 @@ ActiveRecord::Schema.define(version: 20150130042903) do
   create_table "periods_posts", id: false, force: true do |t|
     t.integer "period_id", null: false
     t.integer "post_id",   null: false
+  end
+
+  create_table "post_attachments", force: true do |t|
+    t.integer  "post_id"
+    t.string   "image"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "posts", force: true do |t|

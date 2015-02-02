@@ -9,6 +9,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @post_attachments = @post.post_attachments.all
     @location = Location.all
     @person = Person.all
     @period = Period.all
@@ -18,6 +19,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @post_attachment = @post.post_attachments.build
     @location = Location.new
     @locations = Location.all
     @person = Person.new
@@ -31,6 +33,9 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     authorize @post
     if @post.save
+      params[:post_attachments]['image'].each do |a|
+          @post_attachment = @post.post_attachments.create!(:image => a, :post_id => @post.id)
+       end
       flash[:notice] = "Post was saved."
       redirect_to [@post]
     else
@@ -83,7 +88,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :image, :image_cache, :url_link, :location_ids => [], :person_ids => [], :period_ids => [])
+    params.require(:post).permit(:title, :body, :image, :image_cache, :url_link, :location_ids => [], :person_ids => [], :period_ids => [], post_attachments_attributes: [:id, :post_id, :image])
   end
 
 
