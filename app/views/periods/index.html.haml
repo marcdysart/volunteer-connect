@@ -2,6 +2,8 @@
   %h1 All Periods
 
 - content_for :main_content do
+  %h1
+    = @go
   - @periods.each do |period|
     %p
       =link_to period.start, period

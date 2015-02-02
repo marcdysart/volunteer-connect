@@ -209,17 +209,17 @@ source: substringMatcher(periods)
 
   // bootstrapTags Inputs
 
-  // var loc = $('select');
-  //
-  // loc.tagsinput({
-  //   itemValue: 'id',
-  //   itemText: 'name',
-  //   typeaheadjs: {
-  //     name: 'locations',
-  //     displayKey: 'name',
-  //     source: locations.ttAdapter()
-  //   }
-  // });
+  var loc = $('select');
+
+  loc.tagsinput({
+    itemValue: 'id',
+    itemText: 'name',
+    typeaheadjs: {
+      name: 'locations',
+      displayKey: 'name',
+      source: locations.ttAdapter()
+    }
+  });
 
   var ser= $('input#search_bar')
   ser.tagsinput({

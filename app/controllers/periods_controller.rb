@@ -13,10 +13,11 @@ class PeriodsController < ApplicationController
   end
 
 
-
   def index
     if params[:search]
-      @periods = Period.find(:all, :conditions => ["start_date between ? and ?", Period.start, Period.end])
+      start_date = Date.new(params[:search_from].to_i)
+      end_date = Date.new(params[:search_to].to_i).end_of_year
+      @periods = Period.where("start >= ? AND start <= ?", start_date, end_date)
     else
       @periods = Period.order("start ASC")
     end

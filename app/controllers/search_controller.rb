@@ -2,7 +2,9 @@ class SearchController < ApplicationController
   def results
     case params['search_type']
     when 'period'
-        period = Period.search_start(params[:search]).order("created_at DESC").first
+        start_date = Date.new(params[:search_from].to_i)
+        end_date = Date.new(params[:search_to].to_i).end_of_year
+        @periods = Period.where("start >= ? AND start <= ?", start_date, end_date)
         redirect_to period
     when 'person'
         person = Person.search(params[:search]).order("created_at DESC").first
