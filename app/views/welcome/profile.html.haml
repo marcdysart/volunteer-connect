@@ -17,6 +17,15 @@
         = content_tag :div, class: 'form_group' do
           = f.label 'About Me'
           = f.text_area :aboutme, rows: 6, class: 'form-control', placeholder: "Enter a little about yourself, what are doing now, where do you live now?"
+        %h4
+          .row
+            .col-md-6
+              = f.label 'Choose villages that you lived in Guinea:', class:  'control-label'
+              = select_tag('user[location_ids][]', options_from_collection_for_select(Location.all, 'id', 'name' ), {:class => 'location', :id => 'prefetchlocation',:multiple => true})
+            .col-md-6
+              = f.label 'Choose Years that you lived in Guinea', class: 'control-label'
+              = select_tag('User[period_ids][]', options_from_collection_for_select(Period.all, :start, :show_year), {:id => 'prefetchperiod', :multiple => true})
+
         .form-group
           = f.submit "Update", name: 'profile_button', class: 'btn btn-success'
 

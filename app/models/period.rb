@@ -8,4 +8,8 @@ class Period < ActiveRecord::Base
   def self.search_end(query)
     where("end like ?", "%#{query}%")
   end
+
+  def show_year
+    start.strftime("%Y")
+  end
 end

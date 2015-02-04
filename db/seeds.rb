@@ -85,9 +85,12 @@ end
 people = Person.all
 
 # Create Dates
-10.times do
+
+year_counter=2015
+55.times do
+  year_counter= year_counter-1
   period = Period.new(
-  start: Faker::Date.backward(2000)
+  start: Date.new(year_counter).beginning_of_year
   )
   period.save!
 end

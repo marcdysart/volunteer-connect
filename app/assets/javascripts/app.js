@@ -34,15 +34,6 @@ $(document).ready(function(){
     });
   });
 
-// This changes the dropdown for location
-  $('#dropdownLocation').click(function () {
-    console.log("Location Location is clicked");
-    $('.dropdown-menu a').click(function(ev) {
-      var item_id = $(this).attr('id');
-      var item_name = $(this).text();
-      $('#location_choice').replaceWith("<span id='location_choice'>"+item_name+"</span>");
-    });
-  });
 
 
 //  Typeahead with Prefetch for Locations
@@ -78,15 +69,50 @@ $(document).ready(function(){
       url: '../people.json',
       filter: function (list) {
         // Map the remote source JSON array to a JavaScript object array
-        return $.map(list, function (person) {
+        return $.map(list, function (people) {
           return {
-            name: person.name,
-            id: person.id
+            name: people.name,
+            id: people.id
           };
         });
       }
     }
   });
+
+
+  var periods = new Bloodhound({
+    datumTokenizer: function (datum) {
+      return Bloodhound.tokenizers.whitespace(datum.start);
+    },
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    limit: 55,
+    remote: {
+      url: '../periods.json',
+      filter: function (list) {
+        // Map the remote source JSON array to a JavaScript object array
+        return $.map(list, function (period) {
+          return {
+            start:  period.show_year,
+            id: period.id
+          };
+        });
+      }
+    }
+  });
+// var mypeople = [];
+// $.getJSON('../people.json', function( data ) {
+//     var people = [];
+//     $.each( data, function( key, val ) {
+//       row = "{name: "+data[key]['name']+", id:"+data[key]['id']+"}"
+//       people.push(row);
+//     });
+//     console.log(people);
+//     mypeople.push(people);
+// });
+//
+// console.log(mypeople);
+
+
 
   var substringMatcher = function(strs) {
   return function findMatches(q, cb) {
@@ -101,6 +127,7 @@ $(document).ready(function(){
     // iterate through the pool of strings and for any string that
     // contains the substring `q`, add it to the `matches` array
     $.each(strs, function(i, str) {
+      // this ()  pull the value of the name key
       if (substrRegex.test(str)) {
         // the typeahead jQuery plugin expects suggestions to a
         // JavaScript object, refer to typeahead docs for more info
@@ -111,43 +138,74 @@ $(document).ready(function(){
     cb(matches);
   };
 };
-  var periods = ['1961', '1962', '1963', '1964', '1965', '1966', '1967', '1968', '1969',
+
+
+
+// Converts the data to give suggestions
+ var changeData = function(strs) {
+   testData = [];
+   $.each(strs, function(i, str) {
+     testData.push(str['name']);
+   });
+   return testData;
+ };
+
+ // Converts the data to give suggestions with id number
+  var changeIdData = function(strs) {
+    testData = [];
+    $.each(strs, function(i, str) {
+      testData.push(str['name'],str['id']);
+    });
+    return testData;
+  };
+
+
+
+  var testperiods = ['1961', '1962', '1963', '1964', '1965', '1966', '1967', '1968', '1969',
   '1970', '1971', '1972', '1973', '1974', '1975', '1976', '1977', '1978', '1979',
   '1980', '1981', '1982', '1983', '1984', '1985', '1986', '1987', '1988', '1989',
   '1990','1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999',
   '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009',
   '2010', '2011', '2012', '2013', '2014', '2015'];
 
+  var testlocations = [{"name":"Carmenchester","id":13},{"name":"Conakry","id":12},{"name":"East Jeromyport","id":5},{"name":"Faheyfurt","id":2},{"name":"Keelingfurt","id":6},{"name":"Labe","id":11},{"name":"Lake Beaulahmouth","id":8},{"name":"Lake Nikki","id":15},{"name":"New Alvis","id":10},{"name":"North Ricardotown","id":4},{"name":"O'Konfurt","id":7},{"name":"Shanefort","id":9},{"name":"South Elias","id":3},{"name":"South Mylesmouth","id":14},{"name":"Willmschester","id":1}]
+  var testpeople = [{"name":"Alisa Collins","id":10},{"name":"Delphine Boehm Sr.","id":4},{"name":"Ernestina Legros","id":2},{"name":"Junius Bauch V","id":7},{"name":"Kayden Herzog","id":9},{"name":"Leanna Kuhn V","id":8},{"name":"Member User","id":11},{"name":"Patsy Batz","id":3},{"name":"Robb VonRueden Jr.","id":5},{"name":"Rosie Wisozk","id":1},{"name":"Yasmin Rohan","id":6}]
 
-  $('#time_search_to.typeahead').typeahead({
-  hint: true,
-  highlight: true,
-  minLength: 1
-},
-{
-  name: 'periods',
-  displayKey: 'value',
-  source: substringMatcher(periods)
-});
+// Typeahead for Year to and from
+      $('#time_search_to.typeahead').typeahead({
+      hint: true,
+      highlight: true,
+      minLength: 1
+    },
+    {
+      name: 'testperiods',
+      displayKey: 'value',
+      source: substringMatcher(testperiods)
+    });
 
-$('#time_search_from.typeahead').typeahead({
-hint: true,
-highlight: true,
-minLength: 1
-},
-{
-name: 'periods',
-displayKey: 'value',
-source: substringMatcher(periods)
-});
+    $('#time_search_from.typeahead').typeahead({
+    hint: true,
+    highlight: true,
+    minLength: 1
+    },
+    {
+    name: 'testperiods',
+    displayKey: 'value',
+    source: substringMatcher(testperiods)
+    });
+
+
 
   // Initialize the Bloodhound suggestion engine
-  locations.initialize();
-  people.initialize();
+locations.initialize();
+people.initialize();
+periods.initialize();
 
-  var locationsTypeahead = $('#prefetchlocation.typeahead');
-  var peopleTypeahead = $('#prefetchpeople.typeahead');
-  var searchTypeahead = $('#search_bar.typeahead');
+
+    var locationsTypeahead = $('#prefetchlocation.typeahead');
+    var peopleTypeahead = $('#prefetchpeople.typeahead');
+    var searchTypeahead = $('#search_bar.typeahead');
+    var searchsidebarTypeahead = $('#search_side_bar.typeahead');
 
 
   // Instantiate the Typeahead UI
@@ -156,15 +214,32 @@ source: substringMatcher(periods)
     highlight: true,
   },{
     name: 'locations',
-    displayKey: 'name',
-    source: locations.ttAdapter(),
+    displayKey: 'value',
+    source: substringMatcher(changeData(testlocations)),
     templates: {
       header: '<h3 class="league-name">Locations</h3>'}
   },
   {
     name: 'people',
-    displayKey: 'name',
-    source: people.ttAdapter(),
+    displayKey: 'value',
+    source: substringMatcher(changeData(testpeople)),
+    templates: {
+      header: '<h3 class="league-name">People</h3>'}
+  });
+
+  searchsidebarTypeahead.typeahead({
+    highlight: true,
+  },{
+    name: 'locations',
+    displayKey: 'value',
+    source: substringMatcher(changeData(testlocations)),
+    templates: {
+      header: '<h3 class="league-name">Locations</h3>'}
+  },
+  {
+    name: 'people',
+    displayKey: 'value',
+    source: substringMatcher(changeData(testpeople)),
     templates: {
       header: '<h3 class="league-name">People</h3>'}
   });
@@ -178,7 +253,7 @@ source: substringMatcher(periods)
   },{
     name: 'locations',
     displayKey: 'name',
-    source: locations.ttAdapter()
+    source: substringMatcher(changeData(testlocations))
   });
 
   peopleTypeahead.typeahead({
@@ -186,7 +261,7 @@ source: substringMatcher(periods)
   },{
     name: 'people',
     displayKey: 'name',
-    source: people.ttAdapter()
+    source: substringMatcher(changeData(testpeople))
   });
 
   var locationsItemSelectedHandler = function (eventObject, suggestionObject, suggestionDataset) {
@@ -207,9 +282,9 @@ source: substringMatcher(periods)
   peopleTypeahead.on('typeahead:selected', peopleItemSelectedHandler);
 
 
-  // bootstrapTags Inputs
+  // bootstrapTags Inputs  for the Post#New (Form)
 
-  var loc = $('select');
+  var loc = $('select#prefetchlocation');
 
   loc.tagsinput({
     itemValue: 'id',
@@ -221,27 +296,42 @@ source: substringMatcher(periods)
     }
   });
 
-  var ser= $('input#search_bar')
-  ser.tagsinput({
-    itemValue: 'name',
+
+
+  var pep = $('select#prefetchpeople');
+  pep.tagsinput({
+    itemValue: 'id',
     itemText: 'name',
     typeaheadjs: {
-      name: 'locations',
+      highlight: true,
+      name: 'people',
       displayKey: 'name',
-      source: locations.ttAdapter()
+      source: people.ttAdapter()
     }
   });
 
-  // var pep = $('select');
-  // pep.tagsinput({
-  //   itemValue: 'id',
-  //   itemText: 'name',
-  //   typeaheadjs: {
-  //     highlight: true,
-  //     name: 'people',
-  //     displayKey: 'name',
-  //     source: people.ttAdapter()
-  //   }
+
+  var per = $('select#prefetchperiod');
+  per.tagsinput({
+    itemValue: 'id',
+    itemText: 'start',
+    typeaheadjs: {
+      highlight: true,
+      name: 'periods',
+      displayKey: 'start',
+      source: periods.ttAdapter()
+    }
+  });
+
+  // $('#prefetchperiod.typeahead').typeahead({
+  // hint: true,
+  // highlight: true,
+  // minLength: 1
+  // },
+  // {
+  // name: 'periods',
+  // displayKey: 'value',
+  // source: substringMatcher(periods)
   // });
 
 

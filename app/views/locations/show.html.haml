@@ -2,6 +2,16 @@
   = link_to @location.name, @location, class: 'tag label label-info'
   %h1
     = @location.name
+    = @second_search
+    - if @second_search
+      = @person.name
+
+
+  = form_tag(search_path, method: :post, class: "navbar-form navbar-left", id: "prefetch", :role => "search") do
+    = text_field_tag :second_search, params[:second_search], id: "search_side_bar", class: "typeahead", placeholder: "Search ."
+    %button.btn.btn-default#search_button{:type => "submit"}
+      %i.glyphicon.glyphicon-search
+
 
 - content_for :main_content do
   .row

@@ -1,7 +1,7 @@
 - content_for :nav_content do
   = link_to @period.start.to_formatted_s(:year), @period, class: 'tag label label-info'
   %h1
-    = @period.start
+    = @period.start.to_formatted_s(:year)
 
 - content_for :main_content do
   .row

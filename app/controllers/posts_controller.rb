@@ -33,9 +33,11 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     authorize @post
     if @post.save
-      params[:post_attachments]['image'].each do |a|
-          @post_attachment = @post.post_attachments.create!(:image => a, :post_id => @post.id)
-       end
+      unless params[:post_attachments].nil?
+        params[:post_attachments]['image'].each do |a|
+            @post_attachment = @post.post_attachments.create!(:image => a, :post_id => @post.id)
+         end
+      end
       flash[:notice] = "Post was saved."
       redirect_to [@post]
     else
@@ -71,6 +73,13 @@ class PostsController < ApplicationController
       @people = Person.search(name_cont: q).result
 
   end
+
+  def secondquery
+    @location = Location.find(params[:id])
+    @person = Person.find(params[:search])
+    @posts = @location.posts & @person.posts
+  end
+
 
   def destroy
     @post = Post.find(params[:id])

@@ -1,9 +1,14 @@
 - content_for :nav_content do
-  %h1 All Periods
+  %h1
+    Time Period
+  %h3
+    = params[:search_from].to_i
+    to
+    = params[:search_to].to_i
 
 - content_for :main_content do
-  %h1
-    = @go
   - @periods.each do |period|
-    %p
-      =link_to period.start, period
+    - unless period.posts.first.nil?
+      %h1= period.start.to_formatted_s(:year)
+      - period.posts.each do |post|
+        = render partial: 'posts/post', locals: {post: post}

@@ -22,8 +22,15 @@ class LocationsController < ApplicationController
 
   def show
     @location = Location.find(params[:id])
+
+    if @second_search
+      @person =  Person.search([:second_search]).first
+      @posts = @location.posts & @person.posts
+    else
+      @posts = @location.posts.paginate(page: params[:page], per_page: 6)
+    end
     @locations = Location.all
-    @posts = @location.posts.paginate(page: params[:page], per_page: 6)
+
     @comment = Comment.new
     authorize @location
   end

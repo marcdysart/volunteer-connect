@@ -1,1 +1,1 @@
-json.array! @periods, :start, :id
+json.array! @periods, :show_year , :id

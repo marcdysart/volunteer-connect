@@ -36,20 +36,20 @@
         = link_to 'Create a new Location', new_location_path, :class => 'btn btn-primary'
       .form-group
         = f.label 'Choose Locations', class: 'control-label'
-        = select_tag('post[location_ids][]', options_from_collection_for_select(Location.all, 'id', 'name' ), {:class => 'location', :id => '#prefetchlocation',:multiple => true, :style => "display: none;"})
+        = select_tag('post[location_ids][]', options_from_collection_for_select(Location.all, 'id', 'name' ), {:class => 'location', :id => 'prefetchlocation',:multiple => true, :style => "display: none;"})
     .col-md-4
       .form-group
         = link_to 'Create a new Person', new_person_path, :class => 'btn btn-primary'
       .form-group
         = f.label 'Choose People', class: 'control-label'
-        = select_tag('post[person_ids][]', options_from_collection_for_select(Person.all, 'id', 'name' ), {:id => '#prefetchpeople',:multiple => true})
+        = select_tag('post[person_ids][]', options_from_collection_for_select(Person.all, 'id', 'name' ), {:id => 'prefetchpeople',:multiple => true})
 
     .col-md-4
       .form-group
         = link_to 'Create a new Date', new_period_path, :class => 'btn btn-primary'
       .form-group
         = f.label 'Choose Date', class: 'control-label'
-        = select_tag('post[period_ids][]', options_from_collection_for_select(Period.all, 'start', 'id' ), {:id => '#prefetchperiod', :multiple => true})
+        = select_tag('post[period_ids][]', options_from_collection_for_select(Period.all, :start, :show_year), {:id => 'prefetchperiod', :multiple => true})
 
 
   .form-group
