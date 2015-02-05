@@ -13,6 +13,9 @@ class Post < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   default_scope { order('created_at DESC') }
+  scope :tagged_by, lambda { |person|
+    where('person.id IN ?', person_ids)
+  }
 
   def self.search(query)
     where("name like ?", "%#{query}%")

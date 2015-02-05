@@ -23,9 +23,16 @@ class LocationsController < ApplicationController
   def show
     @location = Location.find(params[:id])
 
-    if @second_search
-      @person =  Person.search([:second_search]).first
-      @posts = @location.posts & @person.posts
+    if params[:filter]
+      @person =  Person.find_by(name: params[:filter])
+      @user = User.find_by(name: params[:filter])
+      # This will show posts that have tags by this name and all the posts written by this name
+      if @user.nil?
+        @posts = (@person.posts & @location.posts)
+      else
+        @posts = (@person.posts & @location.posts) + (@user.posts & @location.posts)
+      end
+      # @posts = Location.find(params[:id]).joins(:posts).tagged_with(@person)
     else
       @posts = @location.posts.paginate(page: params[:page], per_page: 6)
     end

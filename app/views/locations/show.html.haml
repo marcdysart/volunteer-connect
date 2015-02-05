@@ -2,13 +2,31 @@
   = link_to @location.name, @location, class: 'tag label label-info'
   %h1
     = @location.name
-    = @second_search
-    - if @second_search
+  - if params[:filter]
+    %h2
       = @person.name
 
+  - @posts.each do |post|
+    - post.people.each do |person|
+      = link_to person.name, {:filter => person.name}, class: 'tag label label-info'
+    = link_to post.user.person.name, {:filter => post.user.person.name}, class: 'tag label label-info'
 
-  = form_tag(search_path, method: :post, class: "navbar-form navbar-left", id: "prefetch", :role => "search") do
-    = text_field_tag :second_search, params[:second_search], id: "search_side_bar", class: "typeahead", placeholder: "Search ."
+
+
+  .dropdown
+    %button#dropdownMenu1.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "data-toggle" => "dropdown", :type => "button"}
+      People
+      %span.caret
+    %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu1", :role => "menu"}
+      - @posts.each do |post|
+        - post.people.each do |person|
+          %li{:role => "presentation"}
+            = link_to person.name, {:filter => person.name}
+        %li{:role => "presentation"}
+          = link_to post.user.person.name, {:filter => post.user.person.name}
+
+  = form_tag(location_path(@location), method: :get, class: "navbar-form navbar-left", id: "prefetch", :role => "search") do
+    = text_field_tag :filter, params[:filter], id: "search_side_bar", class: "typeahead", placeholder: "Search ."
     %button.btn.btn-default#search_button{:type => "submit"}
       %i.glyphicon.glyphicon-search
 
@@ -20,4 +38,4 @@
         = render partial: 'posts/post', locals: { post: post }
         .new-comment
           = render partial: 'comments/form', locals: {post: post, comment: @comment}
-  = will_paginate @posts
+  -# = will_paginate @posts

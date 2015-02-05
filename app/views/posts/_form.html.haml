@@ -24,7 +24,7 @@
   - unless post.post_attachments.first.nil?
     - post.post_attachments.each do |p|
       = image_tag p.image_url
-      = link_to "Edit Attachment", edit_post_attachment_path(p)
+      -# = link_to "Edit Attachment", edit_post_attachment_path(p)
 
   .row
     .col-md-4

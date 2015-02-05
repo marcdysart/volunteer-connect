@@ -108,18 +108,20 @@ $(document).ready(function(){
 
 
 
-var mypeople = [];
+  var mypeople = [];
 $.getJSON('../people.json', function( data ) {
-    var people = [];
+
     $.each( data, function( key, val ) {
       row = "{name: "+data[key]['name']+", id:"+data[key]['id']+"}"
-      people.push(row);
+      mypeople.push(row);
     });
-    mypeople = console.log(people);
+
+
+    // Call the function for typeahead here
 
 });
 
-console.log(mypeople);
+
 
 
 
@@ -178,8 +180,6 @@ console.log(mypeople);
   '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009',
   '2010', '2011', '2012', '2013', '2014', '2015'];
 
-  var testlocations = [{"name":"Carmenchester","id":13},{"name":"Conakry","id":12},{"name":"East Jeromyport","id":5},{"name":"Faheyfurt","id":2},{"name":"Keelingfurt","id":6},{"name":"Labe","id":11},{"name":"Lake Beaulahmouth","id":8},{"name":"Lake Nikki","id":15},{"name":"New Alvis","id":10},{"name":"North Ricardotown","id":4},{"name":"O'Konfurt","id":7},{"name":"Shanefort","id":9},{"name":"South Elias","id":3},{"name":"South Mylesmouth","id":14},{"name":"Willmschester","id":1}]
-  var testpeople = [{"name":"Alisa Collins","id":10},{"name":"Delphine Boehm Sr.","id":4},{"name":"Ernestina Legros","id":2},{"name":"Junius Bauch V","id":7},{"name":"Kayden Herzog","id":9},{"name":"Leanna Kuhn V","id":8},{"name":"Member User","id":11},{"name":"Patsy Batz","id":3},{"name":"Robb VonRueden Jr.","id":5},{"name":"Rosie Wisozk","id":1},{"name":"Yasmin Rohan","id":6}]
 
 // Typeahead for Year to and from
       $('#time_search_to.typeahead').typeahead({
@@ -219,7 +219,7 @@ periods.initialize();
 
 
   // Instantiate the Typeahead UI
-
+// Make this a fuhction
   searchTypeahead.typeahead({
     highlight: true,
   },{
@@ -454,6 +454,9 @@ $('.owl-carousel').owlCarousel({
     }
 })
 
-
+console.log(mypeople);
 
 });
+
+testlocations = [{"name":"Carmenchester","id":13},{"name":"Conakry","id":12},{"name":"East Jeromyport","id":5},{"name":"Faheyfurt","id":2},{"name":"Keelingfurt","id":6},{"name":"Labe","id":11},{"name":"Lake Beaulahmouth","id":8},{"name":"Lake Nikki","id":15},{"name":"New Alvis","id":10},{"name":"North Ricardotown","id":4},{"name":"O'Konfurt","id":7},{"name":"Shanefort","id":9},{"name":"South Elias","id":3},{"name":"South Mylesmouth","id":14},{"name":"Willmschester","id":1}]
+testpeople = [{"name":"Alisa Collins","id":10},{"name":"Delphine Boehm Sr.","id":4},{"name":"Ernestina Legros","id":2},{"name":"Junius Bauch V","id":7},{"name":"Kayden Herzog","id":9},{"name":"Leanna Kuhn V","id":8},{"name":"Member User","id":11},{"name":"Patsy Batz","id":3},{"name":"Robb VonRueden Jr.","id":5},{"name":"Rosie Wisozk","id":1},{"name":"Yasmin Rohan","id":6}]

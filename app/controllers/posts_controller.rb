@@ -11,7 +11,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post_attachments = @post.post_attachments.all
     @location = Location.all
-    @person = Person.all
+    @person = Person.all.joins(@post.user)
     @period = Period.all
     @comment = Comment.new
     authorize @post
@@ -23,7 +23,7 @@ class PostsController < ApplicationController
     @location = Location.new
     @locations = Location.all
     @person = Person.new
-    @people = Person.all
+    @people = Person.all.joins(current_user)
     @period = Period.new
     @periods = Period.all
     authorize @post
