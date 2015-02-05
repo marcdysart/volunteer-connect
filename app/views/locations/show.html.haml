@@ -1,5 +1,7 @@
 - content_for :nav_content do
   = link_to @location.name, @location, class: 'tag label label-info'
+  - if params[:filter]
+    = link_to @person.name, @person, class: 'tag label label-info'
   %h1
     = @location.name
   - if params[:filter]

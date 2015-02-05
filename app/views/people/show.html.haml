@@ -1,11 +1,16 @@
 - content_for :nav_content do
   - if @person.user.nil?
     = link_to @person.name, @person, class: 'tag label label-info'
+    - if params[:filter]
+      = link_to @location.name, @location, class: 'tag label label-info'
+
     %h1
       = @person.name
       %span.large-avatar.glyphicon.glyphicon-user
   - else
     = link_to @person.user.name, @person, class: 'tag label label-info'
+    - if params[:filter]
+      = link_to @location.name, @location, class: 'tag label label-info'
     %h1
       = @person.user.name
       - if @person.user.avatar?
@@ -15,6 +20,15 @@
         %span.large-avatar.glyphicon.glyphicon-user
     %h3
       = @person.user.aboutme
+  .dropdown
+    %button#dropdownMenu1.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "data-toggle" => "dropdown", :type => "button"}
+      Locations
+      %span.caret
+    %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu1", :role => "menu"}
+      - @posts.each do |post|
+        - post.locations.each do |location|
+          %li{:role => "presentation"}
+            = link_to location.name, {:filter => location.name}
 
 - content_for :main_content do
   .row
@@ -23,4 +37,4 @@
         = render partial: 'posts/post', locals: { post: post }
         .new-comment
           = render partial: 'comments/form', locals: {post: post, comment: @comment}
-  = will_paginate @posts
+  -# = will_paginate @posts

@@ -37,6 +37,12 @@ class LocationsController < ApplicationController
       @posts = @location.posts.paginate(page: params[:page], per_page: 6)
     end
     @locations = Location.all
+    # This is code to get all the people to be unique  Something like
+    # User.select(:name).distinct
+    # @posts.each do |post|
+    #   post.people.each do |person|
+    #     @people = @people + person
+    # @people =
 
     @comment = Comment.new
     authorize @location

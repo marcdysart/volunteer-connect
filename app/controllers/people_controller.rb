@@ -22,7 +22,21 @@ class PeopleController < ApplicationController
 
   def show
     @person = Person.find(params[:id])
-    @posts = @person.posts.paginate(page: params[:page], per_page: 6)
+    unless @person.user.nil?
+      @user = User.find(@person.user.id)
+    end
+    if params[:filter]
+      @location =  Location.find_by(name: params[:filter])
+
+      # This will show posts that have tags by this name and all the posts written by this name
+      if @user.nil?
+        @posts = (@person.posts & @location.posts)
+      else
+        @posts = (@person.posts & @location.posts) + (@user.posts & @location.posts)
+      end
+    else
+      @posts = @person.posts.paginate(page: params[:page], per_page: 6)
+    end
     @comment = Comment.new
     authorize @person
   end
