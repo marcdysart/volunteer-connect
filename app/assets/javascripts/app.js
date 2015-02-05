@@ -99,18 +99,28 @@ $(document).ready(function(){
       }
     }
   });
-// var mypeople = [];
-// $.getJSON('../people.json', function( data ) {
-//     var people = [];
-//     $.each( data, function( key, val ) {
-//       row = "{name: "+data[key]['name']+", id:"+data[key]['id']+"}"
-//       people.push(row);
-//     });
-//     console.log(people);
-//     mypeople.push(people);
-// });
-//
-// console.log(mypeople);
+
+
+  // $.getJSON('../people.json', function( data ) {
+  //     var people1 = data
+  //     console.log(people1);
+  //     });
+
+
+
+var mypeople = [];
+$.getJSON('../people.json', function( data ) {
+    var people = [];
+    $.each( data, function( key, val ) {
+      row = "{name: "+data[key]['name']+", id:"+data[key]['id']+"}"
+      people.push(row);
+    });
+    mypeople = console.log(people);
+
+});
+
+console.log(mypeople);
+
 
 
 
@@ -415,7 +425,7 @@ function deleteMarkers() {
   markers = [];
 }
 
-google.maps.event.addDomListener(window, 'load', initialize);
+// google.maps.event.addDomListener(window, 'load', initialize);
 
 $('#delete_markers').click(function () {
   deleteMarkers();
@@ -425,5 +435,25 @@ $('#find_location').click(function () {
   codeAddress();
 
 });
+
+// OwlCarousel for multiple photos
+$('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:5
+        }
+    }
+})
+
+
 
 });

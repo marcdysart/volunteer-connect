@@ -16,20 +16,16 @@
     = f.label 'Link to Webpage'
     = f.url_field 'url_link'
 
-  - unless post.image.url.nil?
-    .form-group
-      %p Current image
-      = image_tag( post.image.url )
-  .form-group
+  .field
     = f.label :image
-    = f.file_field :image
-    = f.hidden_field :image_cache
+    %br/
+    = f.file_field :image, :multiple => true, name: "post_attachments[image][]"
 
-  = f.fields_for :post_attachments do |p|
-    .field
-      = p.label :image
-      %br/
-      = p.file_field :image, :multiple => true, name: "post_attachments[image][]"
+  - unless post.post_attachments.first.nil?
+    - post.post_attachments.each do |p|
+      = image_tag p.image_url
+      = link_to "Edit Attachment", edit_post_attachment_path(p)
+
   .row
     .col-md-4
       .form-group

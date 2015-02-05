@@ -10,13 +10,15 @@
       = link_to post.user.name, post.user.person
       %br/
       %br/
+      .owl-carousel
+        - unless post.post_attachments.first.nil?
+          - post.post_attachments.each do |p|
+            = image_tag p.image_url
+            -# = link_to "Edit Attachment", edit_post_attachment_path(p)
       .row
-        .col-md-6
+        .col-md-6.fill
           - unless post.post_attachments.first.nil?
-            - @post_attachments.each do |p|
-              = image_tag p.image_url
-              = link_to "Edit Attachment", edit_post_attachment_path(p)
-
+            = image_tag post.post_attachments.first.image_url
         .col-md-6
           %img{:src => "https://maps.googleapis.com/maps/api/staticmap?&zoom=7&size=400x400&markers=color:blue%7Clabel:A%7C#{post.locations.first.latitude},#{post.locations.first.longitude}"}
       = link_to post.url_link, post.url_link if post.url_link?
