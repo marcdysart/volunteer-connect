@@ -5,10 +5,29 @@
     = params[:search_from].to_i
     to
     = params[:search_to].to_i
+  - if params[:filter]
+    %h3
+      = @person.name
+
+
+  .dropdown
+    %button#dropdownMenu1.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "data-toggle" => "dropdown", :type => "button"}
+      People
+      %span.caret
+    %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu1", :role => "menu"}
+      - unless @unique_people.nil?
+        - @unique_people.each do |person|
+          %li{:role => "presentation"}
+            = link_to person.name, {:filter => person.name, :search_from => @start_date, :search_to => @end_date}
 
 - content_for :main_content do
+  - if params[:filter]
+    - if @posts.first.present?
+      - @posts.each do |post|
+        = render partial: 'posts/post', locals: {post: post}
+
   - @periods.each do |period|
-    - unless period.posts.first.nil?
+    - if period.posts.first.present?
       %h1= period.start.to_formatted_s(:year)
       - period.posts.each do |post|
         = render partial: 'posts/post', locals: {post: post}
