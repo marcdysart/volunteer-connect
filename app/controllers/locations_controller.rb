@@ -28,9 +28,11 @@ class LocationsController < ApplicationController
       @user = User.find_by(name: params[:filter])
       # This will show posts that have tags by this name and all the posts written by this name
       if @user.nil?
-        @posts = (@person.posts & @location.posts)
+        @posts = @location.posts.joins(:people).where(people: {id: @person.id} )
+        # @posts = (@person.posts & @location.posts)
       else
-        @posts = (@person.posts & @location.posts) + (@user.posts & @location.posts)
+        @posts = @location.posts.joins(:people).where(people: {id: @person.id} ) + (@user.posts & @location.posts)
+        # @posts = (@person.posts & @location.posts) + (@user.posts & @location.posts)
       end
       # @posts = Location.find(params[:id]).joins(:posts).tagged_with(@person)
     else
@@ -38,11 +40,13 @@ class LocationsController < ApplicationController
     end
     @locations = Location.all
     # This is code to get all the people to be unique  Something like
-    # User.select(:name).distinct
-    # @posts.each do |post|
-    #   post.people.each do |person|
-    #     @people = @people + person
-    # @people =
+    # @people = @posts.joins(:people).uniq
+    
+    get_unique_people
+    @unique_people = @pop.uniq
+
+
+
 
     @comment = Comment.new
     authorize @location
@@ -78,6 +82,16 @@ class LocationsController < ApplicationController
 
   def location_params
     params.require(:location).permit(:name)
+  end
+
+  def get_unique_people
+    @pop = []
+    @posts.each do |post|
+      post.people.each do |person|
+        @pop.push(person)
+      end
+      @pop.push(post.user.person)
+    end
   end
 
 end

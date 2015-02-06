@@ -25,10 +25,9 @@
       Locations
       %span.caret
     %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu1", :role => "menu"}
-      - @posts.each do |post|
-        - post.locations.each do |location|
-          %li{:role => "presentation"}
-            = link_to location.name, {:filter => location.name}
+      - @unique_locations.each do |location|
+        %li{:role => "presentation"}
+          = link_to location.name, {:filter => location.name}
 
 - content_for :main_content do
   .row

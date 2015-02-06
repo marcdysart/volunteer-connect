@@ -5,14 +5,9 @@
   %h1
     = @location.name
   - if params[:filter]
-    %h2
+    %h2 
+      "-->"
       = @person.name
-
-  - @posts.each do |post|
-    - post.people.each do |person|
-      = link_to person.name, {:filter => person.name}, class: 'tag label label-info'
-    = link_to post.user.person.name, {:filter => post.user.person.name}, class: 'tag label label-info'
-
 
 
   .dropdown
@@ -20,12 +15,12 @@
       People
       %span.caret
     %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu1", :role => "menu"}
-      - @posts.each do |post|
-        - post.people.each do |person|
-          %li{:role => "presentation"}
-            = link_to person.name, {:filter => person.name}
+      - @unique_people.each do |person|
         %li{:role => "presentation"}
-          = link_to post.user.person.name, {:filter => post.user.person.name}
+          = link_to person.name, {:filter => person.name}
+      -# - @posts.each do |post|
+      -#   %li{:role => "presentation"}
+      -#     = link_to post.user.person.name, {:filter => post.user.person.name}
 
   = form_tag(location_path(@location), method: :get, class: "navbar-form navbar-left", id: "prefetch", :role => "search") do
     = text_field_tag :filter, params[:filter], id: "search_side_bar", class: "typeahead", placeholder: "Search ."
