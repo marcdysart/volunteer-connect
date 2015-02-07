@@ -1,3 +1,6 @@
+// testlocations = [{"name":"Carmenchester","id":13},{"name":"Conakry","id":12},{"name":"East Jeromyport","id":5},{"name":"Faheyfurt","id":2},{"name":"Keelingfurt","id":6},{"name":"Labe","id":11},{"name":"Lake Beaulahmouth","id":8},{"name":"Lake Nikki","id":15},{"name":"New Alvis","id":10},{"name":"North Ricardotown","id":4},{"name":"O'Konfurt","id":7},{"name":"Shanefort","id":9},{"name":"South Elias","id":3},{"name":"South Mylesmouth","id":14},{"name":"Willmschester","id":1}]
+// testpeople = [{"name":"Alisa Collins","id":10},{"name":"Delphine Boehm Sr.","id":4},{"name":"Ernestina Legros","id":2},{"name":"Junius Bauch V","id":7},{"name":"Kayden Herzog","id":9},{"name":"Leanna Kuhn V","id":8},{"name":"Member User","id":11},{"name":"Patsy Batz","id":3},{"name":"Robb VonRueden Jr.","id":5},{"name":"Rosie Wisozk","id":1},{"name":"Yasmin Rohan","id":6}]
+
 $(document).ready(function(){
 
   // This changes the dropdown for search in the navigation
@@ -101,26 +104,31 @@ $(document).ready(function(){
   });
 
 
-  // $.getJSON('../people.json', function( data ) {
-  //     var people1 = data
-  //     console.log(people1);
-  //     });
-
-
-
-  var mypeople = [];
-$.getJSON('../people.json', function( data ) {
-
-    $.each( data, function( key, val ) {
-      row = "{name: "+data[key]['name']+", id:"+data[key]['id']+"}"
-      mypeople.push(row);
-    });
-
+  var peopledata = [];
+  $.getJSON('../people.json', function( data ) {
+      $.each( data, function( key, val ) {
+        row = data[key]['name']
+        peopledata.push(row);
+      });
 
     // Call the function for typeahead here
 
-});
 
+
+  });
+
+  var locationdata = [];
+  $.getJSON('../locations.json', function( data ) {
+      $.each( data, function( key, val ) {
+        row = data[key]['name']
+        locationdata.push(row);
+      });
+
+    // Call the function for typeahead here
+
+    useTypeahead(peopledata, locationdata);
+
+  });
 
 
 
@@ -153,23 +161,23 @@ $.getJSON('../people.json', function( data ) {
 
 
 
-// Converts the data to give suggestions
- var changeData = function(strs) {
-   testData = [];
-   $.each(strs, function(i, str) {
-     testData.push(str['name']);
-   });
-   return testData;
- };
-
- // Converts the data to give suggestions with id number
-  var changeIdData = function(strs) {
-    testData = [];
-    $.each(strs, function(i, str) {
-      testData.push(str['name'],str['id']);
-    });
-    return testData;
-  };
+// // Converts the data to give suggestions
+//  var changeData = function(strs) {
+//    testData = [];
+//    $.each(strs, function(i, str) {
+//      testData.push(str['name']);
+//    });
+//    return testData;
+//  };
+//
+//  // Converts the data to give suggestions with id number
+//   var changeIdData = function(strs) {
+//     testData = [];
+//     $.each(strs, function(i, str) {
+//       testData.push(str['name'],str['id']);
+//     });
+//     return testData;
+//   };
 
 
 
@@ -220,36 +228,38 @@ periods.initialize();
 
   // Instantiate the Typeahead UI
 // Make this a fuhction
-  searchTypeahead.typeahead({
+var useTypeahead = function (peopledata, locationdata){ searchTypeahead.typeahead({
     highlight: true,
   },{
     name: 'locations',
     displayKey: 'value',
-    source: substringMatcher(changeData(testlocations)),
+    source: substringMatcher(locationdata),
     templates: {
       header: '<h3 class="league-name">Locations</h3>'}
   },
   {
     name: 'people',
     displayKey: 'value',
-    source: substringMatcher(changeData(testpeople)),
+    source: substringMatcher(peopledata),
     templates: {
       header: '<h3 class="league-name">People</h3>'}
   });
+
+}
 
   searchsidebarTypeahead.typeahead({
     highlight: true,
   },{
     name: 'locations',
     displayKey: 'value',
-    source: substringMatcher(changeData(testlocations)),
+    source: substringMatcher(locationdata),
     templates: {
       header: '<h3 class="league-name">Locations</h3>'}
   },
   {
     name: 'people',
     displayKey: 'value',
-    source: substringMatcher(changeData(testpeople)),
+    source: substringMatcher(peopledata),
     templates: {
       header: '<h3 class="league-name">People</h3>'}
   });
@@ -258,38 +268,38 @@ periods.initialize();
 
 
 
-  locationsTypeahead.typeahead({
-    highlight: true,
-  },{
-    name: 'locations',
-    displayKey: 'name',
-    source: substringMatcher(changeData(testlocations))
-  });
-
-  peopleTypeahead.typeahead({
-    highlight: true
-  },{
-    name: 'people',
-    displayKey: 'name',
-    source: substringMatcher(changeData(testpeople))
-  });
-
-  var locationsItemSelectedHandler = function (eventObject, suggestionObject, suggestionDataset) {
-      /* According to the documentation the following should work https://github.com/twitter/typeahead.js/blob/master/doc/jquery_typeahead.md#jquerytypeaheadval-val.
-      However it causes the suggestion to appear which is not wanted */
-      //employeeIdTypeahead.typeahead('val', suggestionObject.id);
-      peopleTypeahead.val(suggestionObject.id);
-  };
-
-  var peopleItemSelectedHandler = function (eventObject, suggestionObject, suggestionDataset) {
-      /* See comment in previous method */
-      //employeeNameTypeahead.typeahead('val', suggestionObject.name);
-      locationsTypeahead.val(suggestionObject.name);
-  };
-
-  // Associate the typeahead:selected event with the bespoke handler
-  locationsTypeahead.on('typeahead:selected', locationsItemSelectedHandler);
-  peopleTypeahead.on('typeahead:selected', peopleItemSelectedHandler);
+  // locationsTypeahead.typeahead({
+  //   highlight: true,
+  // },{
+  //   name: 'locations',
+  //   displayKey: 'name',
+  //   source: substringMatcher(changeData(testlocations))
+  // });
+  //
+  // peopleTypeahead.typeahead({
+  //   highlight: true
+  // },{
+  //   name: 'people',
+  //   displayKey: 'name',
+  //   source: substringMatcher(changeData(testpeople))
+  // });
+  //
+  // var locationsItemSelectedHandler = function (eventObject, suggestionObject, suggestionDataset) {
+  //     /* According to the documentation the following should work https://github.com/twitter/typeahead.js/blob/master/doc/jquery_typeahead.md#jquerytypeaheadval-val.
+  //     However it causes the suggestion to appear which is not wanted */
+  //     //employeeIdTypeahead.typeahead('val', suggestionObject.id);
+  //     peopleTypeahead.val(suggestionObject.id);
+  // };
+  //
+  // var peopleItemSelectedHandler = function (eventObject, suggestionObject, suggestionDataset) {
+  //     /* See comment in previous method */
+  //     //employeeNameTypeahead.typeahead('val', suggestionObject.name);
+  //     locationsTypeahead.val(suggestionObject.name);
+  // };
+  //
+  // // Associate the typeahead:selected event with the bespoke handler
+  // locationsTypeahead.on('typeahead:selected', locationsItemSelectedHandler);
+  // peopleTypeahead.on('typeahead:selected', peopleItemSelectedHandler);
 
 
   // bootstrapTags Inputs  for the Post#New (Form)
@@ -333,16 +343,7 @@ periods.initialize();
     }
   });
 
-  // $('#prefetchperiod.typeahead').typeahead({
-  // hint: true,
-  // highlight: true,
-  // minLength: 1
-  // },
-  // {
-  // name: 'periods',
-  // displayKey: 'value',
-  // source: substringMatcher(periods)
-  // });
+
 
 
 
@@ -454,9 +455,5 @@ $('.owl-carousel').owlCarousel({
     }
 })
 
-console.log(mypeople);
 
 });
-
-testlocations = [{"name":"Carmenchester","id":13},{"name":"Conakry","id":12},{"name":"East Jeromyport","id":5},{"name":"Faheyfurt","id":2},{"name":"Keelingfurt","id":6},{"name":"Labe","id":11},{"name":"Lake Beaulahmouth","id":8},{"name":"Lake Nikki","id":15},{"name":"New Alvis","id":10},{"name":"North Ricardotown","id":4},{"name":"O'Konfurt","id":7},{"name":"Shanefort","id":9},{"name":"South Elias","id":3},{"name":"South Mylesmouth","id":14},{"name":"Willmschester","id":1}]
-testpeople = [{"name":"Alisa Collins","id":10},{"name":"Delphine Boehm Sr.","id":4},{"name":"Ernestina Legros","id":2},{"name":"Junius Bauch V","id":7},{"name":"Kayden Herzog","id":9},{"name":"Leanna Kuhn V","id":8},{"name":"Member User","id":11},{"name":"Patsy Batz","id":3},{"name":"Robb VonRueden Jr.","id":5},{"name":"Rosie Wisozk","id":1},{"name":"Yasmin Rohan","id":6}]
